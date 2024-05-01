@@ -141,6 +141,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -148,10 +161,10 @@ TextureImporter:
       name: pinguin_22x22_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 3
         y: 66
-        width: 22
-        height: 22
+        width: 16
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,10 +182,10 @@ TextureImporter:
       name: pinguin_22x22_1
       rect:
         serializedVersion: 2
-        x: 22
-        y: 66
-        width: 22
-        height: 22
+        x: 26
+        y: 67
+        width: 14
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,10 +203,10 @@ TextureImporter:
       name: pinguin_22x22_2
       rect:
         serializedVersion: 2
-        x: 44
+        x: 47
         y: 66
-        width: 22
-        height: 22
+        width: 16
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -211,10 +224,10 @@ TextureImporter:
       name: pinguin_22x22_3
       rect:
         serializedVersion: 2
-        x: 66
-        y: 66
-        width: 22
-        height: 22
+        x: 69
+        y: 67
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -232,10 +245,10 @@ TextureImporter:
       name: pinguin_22x22_4
       rect:
         serializedVersion: 2
-        x: 0
+        x: 5
         y: 44
-        width: 22
-        height: 22
+        width: 13
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -253,10 +266,10 @@ TextureImporter:
       name: pinguin_22x22_5
       rect:
         serializedVersion: 2
-        x: 22
+        x: 27
         y: 44
-        width: 22
-        height: 22
+        width: 13
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -274,10 +287,10 @@ TextureImporter:
       name: pinguin_22x22_6
       rect:
         serializedVersion: 2
-        x: 44
+        x: 49
         y: 44
-        width: 22
-        height: 22
+        width: 13
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -295,10 +308,10 @@ TextureImporter:
       name: pinguin_22x22_7
       rect:
         serializedVersion: 2
-        x: 66
-        y: 44
-        width: 22
-        height: 22
+        x: 68
+        y: 50
+        width: 20
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -316,10 +329,10 @@ TextureImporter:
       name: pinguin_22x22_8
       rect:
         serializedVersion: 2
-        x: 0
+        x: 3
         y: 22
-        width: 22
-        height: 22
+        width: 16
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -337,10 +350,10 @@ TextureImporter:
       name: pinguin_22x22_9
       rect:
         serializedVersion: 2
-        x: 22
-        y: 22
-        width: 22
-        height: 22
+        x: 26
+        y: 23
+        width: 14
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -358,10 +371,10 @@ TextureImporter:
       name: pinguin_22x22_10
       rect:
         serializedVersion: 2
-        x: 44
+        x: 47
         y: 22
-        width: 22
-        height: 22
+        width: 16
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -379,10 +392,10 @@ TextureImporter:
       name: pinguin_22x22_11
       rect:
         serializedVersion: 2
-        x: 66
-        y: 22
-        width: 22
-        height: 22
+        x: 69
+        y: 23
+        width: 16
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -400,10 +413,10 @@ TextureImporter:
       name: pinguin_22x22_12
       rect:
         serializedVersion: 2
-        x: 0
+        x: 4
         y: 0
-        width: 22
-        height: 22
+        width: 13
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -421,10 +434,10 @@ TextureImporter:
       name: pinguin_22x22_13
       rect:
         serializedVersion: 2
-        x: 22
+        x: 26
         y: 0
-        width: 22
-        height: 22
+        width: 13
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -442,10 +455,10 @@ TextureImporter:
       name: pinguin_22x22_14
       rect:
         serializedVersion: 2
-        x: 44
+        x: 48
         y: 0
-        width: 22
-        height: 22
+        width: 13
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -464,9 +477,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 66
-        y: 0
-        width: 22
-        height: 22
+        y: 6
+        width: 20
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
