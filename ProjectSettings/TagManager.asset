@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -41,6 +42,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: objects
+  - name: Background
+    uniqueID: 2057131515
+    locked: 0
+  - name: Collisions
+    uniqueID: 2229997049
+    locked: 0
+  - name: Player
     uniqueID: 66642891
     locked: 0
