@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmallMonster : Monster
+public class MediumMonster : Monster
 {
     public override void Awake()
     {
         base.Awake();
-        LivesCount = 1;
+        LivesCount = Random.Range(1, 3);
         StandardSpeed = 2;
         WalkingRadius = 6;
         obstacleLayer = LayerMask.GetMask("Collision");
@@ -31,4 +31,5 @@ public class SmallMonster : Monster
     {
         base.Walking();
     }
+    
 }

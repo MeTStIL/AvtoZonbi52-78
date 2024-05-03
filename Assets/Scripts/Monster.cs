@@ -11,8 +11,9 @@ public abstract class Monster : MonoBehaviour
     protected float walkingRadius;
     protected SpriteRenderer sprite;
     private Vector3 targetPosition;
-    private bool isStopped = true;
+    private bool isStopped = false;
     public LayerMask obstacleLayer;
+
 
     public int LivesCount
     {
@@ -45,11 +46,12 @@ public abstract class Monster : MonoBehaviour
         collider = GetComponent<Collider2D>();
         spritePosition = sprite.transform.position;
         SetNewTargetPosition();
-        
     }
 
-    public virtual void Update()
+    public virtual void LateUpdate()
     {
+        if (isStopped)
+            StartCoroutine(StopAndSetNewTarget());
         Walking();
     }
 
@@ -67,44 +69,42 @@ public abstract class Monster : MonoBehaviour
 
     public virtual void Walking()
     {
-        if (Vector3.Distance(sprite.transform.position, targetPosition) > 0.001f && isStopped)
+        if (Vector3.Distance(sprite.transform.position, targetPosition) > 0.1f)
         {
             Vector3 direction = (targetPosition - sprite.transform.position).normalized;
             sprite.transform.position = Vector3.MoveTowards(sprite.transform.position, targetPosition, StandardSpeed * Time.deltaTime);
         }
-        else if (!isStopped)
+        else
         {
-            isStopped = true;
-            StartCoroutine(StopForSeconds());
+            StartCoroutine(StopAndSetNewTarget());
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         // Этот метод будет вызван, когда другой коллайдер входит в столкновение с myCollider
-        isStopped = false;
-        SetNewTargetPosition();
+        isStopped = true;
+
+        
     }
     void OnCollisionStay2D(Collision2D collision)
     {
         // Этот метод будет вызван, когда другой коллайдер входит в столкновение с myCollider
-        isStopped = false;
-        SetNewTargetPosition();
+        isStopped = true;
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        SetNewTargetPosition();        
-    }
-    
-
-    private IEnumerator StopForSeconds()
-    {
-        yield return new WaitForSeconds(2f); // Остановка на 2 секунды
         isStopped = false;
-        SetNewTargetPosition();
     }
 
+    private IEnumerator StopAndSetNewTarget()
+    {
+        isStopped = true;
+        yield return new WaitForSeconds(2f); // Остановка на 2 секунды
+        SetNewTargetPosition();
+        isStopped = false;
+    }
 
     private void SetNewTargetPosition()
     {
