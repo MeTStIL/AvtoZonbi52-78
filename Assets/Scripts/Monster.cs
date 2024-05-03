@@ -13,6 +13,8 @@ public abstract class Monster : MonoBehaviour
     private Vector3 targetPosition;
     private bool isStopped = false;
     public LayerMask obstacleLayer;
+    private Rigidbody2D rb;
+    public float freezeTime = 2f;
 
 
     public int LivesCount
@@ -44,6 +46,7 @@ public abstract class Monster : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
+        rb = GetComponent<Rigidbody2D>();
         spritePosition = sprite.transform.position;
         SetNewTargetPosition();
     }
@@ -69,7 +72,7 @@ public abstract class Monster : MonoBehaviour
 
     public virtual void Walking()
     {
-        if (Vector3.Distance(sprite.transform.position, targetPosition) > 0.1f)
+        if (Vector3.Distance(sprite.transform.position, targetPosition) > 0.1f && rb.isKinematic == false)
         {
             Vector3 direction = (targetPosition - sprite.transform.position).normalized;
             sprite.transform.position = Vector3.MoveTowards(sprite.transform.position, targetPosition, StandardSpeed * Time.deltaTime);
@@ -80,22 +83,24 @@ public abstract class Monster : MonoBehaviour
         }
     }
 
+    void Unfreeze()
+    {
+        // Размораживаем объект
+        rb.isKinematic = false;
+        Vector3 direction = -(targetPosition - sprite.transform.position).normalized;
+        sprite.transform.position = Vector3.MoveTowards(sprite.transform.position, targetPosition, StandardSpeed * Time.deltaTime);
+        SetNewTargetPosition();
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Этот метод будет вызван, когда другой коллайдер входит в столкновение с myCollider
-        isStopped = true;
+        rb.isKinematic = true;
+        // Останавливаем объект
+        rb.velocity = Vector2.zero;
+        // Вызываем метод Unfreeze через freezeTime секунд
+        Invoke("Unfreeze", freezeTime);
 
         
-    }
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        // Этот метод будет вызван, когда другой коллайдер входит в столкновение с myCollider
-        isStopped = true;
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        isStopped = false;
     }
 
     private IEnumerator StopAndSetNewTarget()
