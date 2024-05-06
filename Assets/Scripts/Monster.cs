@@ -1,53 +1,43 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public abstract class Monster : MonoBehaviour
+public interface IMonster
 {
-    protected int livesCount;
-    protected Collider2D collider;
-    protected float standardSpeed;
-    protected float walkingRadius;
-    protected SpriteRenderer sprite;
+    int LivesCount { get; set; }
+    float StandardSpeed { get; set; }
+    float WalkingRadius { get; set; }
+    Vector3 SpritePosition { get; set; }
+
+    void Awake();
+    void LateUpdate();
+    void Die();
+    void GetDamage();
+    void Walking();
+    IEnumerator StopAndSetNewTarget();
+    void SetNewTargetPosition();
+}
+
+public class Monster : MonoBehaviour, IMonster
+{
+    public int LivesCount { get; set; }
+    public float StandardSpeed { get; set; }
+    public float WalkingRadius { get; set; }
+    public Vector3 SpritePosition { get; set; }
+
+    private Collider2D collider;
+    private SpriteRenderer sprite;
     private Vector3 targetPosition;
     private bool isStopped = false;
     public LayerMask obstacleLayer;
     private Rigidbody2D rb;
     public float freezeTime = 2f;
 
-
-    public int LivesCount
-    {
-        get { return livesCount; }
-        set { livesCount = value; }
-    }
-
-    public float StandardSpeed
-    {
-        get { return standardSpeed; }
-        set { standardSpeed = value; }
-    }
-
-    public float WalkingRadius
-    {
-        get { return walkingRadius; }
-        set { walkingRadius = value; }
-    }
-    private float attackRadius
-     {
-        get { return attackRadius; }
-        set { attackRadius = value; }
-    }
-    
-    [SerializeField] Vector3 spritePosition {get; set;}
-
     public virtual void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
-        spritePosition = sprite.transform.position;
+        SpritePosition = sprite.transform.position;
         SetNewTargetPosition();
     }
 
@@ -60,13 +50,13 @@ public abstract class Monster : MonoBehaviour
 
     public virtual void Die()
     {
-        Destroy(gameObject, 1.4f);   
+        Destroy(gameObject, 1.4f);
     }
 
     public virtual void GetDamage()
     {
-        livesCount -= 1;
-        if (livesCount == 0)
+        LivesCount -= 1;
+        if (LivesCount == 0)
             Die();
     }
 
@@ -83,7 +73,22 @@ public abstract class Monster : MonoBehaviour
         }
     }
 
-    void Unfreeze()
+    public IEnumerator StopAndSetNewTarget()
+    {
+        isStopped = true;
+        yield return new WaitForSeconds(2f); // Остановка на 2 секунды
+        SetNewTargetPosition();
+        isStopped = false;
+    }
+
+    public void SetNewTargetPosition()
+    {
+        var newX = Random.Range(-WalkingRadius + SpritePosition.x, WalkingRadius + SpritePosition.x);
+        var newY = Random.Range(-WalkingRadius + SpritePosition.y, WalkingRadius + SpritePosition.y);
+        targetPosition = new Vector3(newX, newY, sprite.transform.position.z);
+    }
+
+    private void Unfreeze()
     {
         // Размораживаем объект
         rb.isKinematic = false;
@@ -92,29 +97,12 @@ public abstract class Monster : MonoBehaviour
         SetNewTargetPosition();
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         rb.isKinematic = true;
         // Останавливаем объект
         rb.velocity = Vector2.zero;
         // Вызываем метод Unfreeze через freezeTime секунд
         Invoke("Unfreeze", freezeTime);
-
-        
-    }
-
-    private IEnumerator StopAndSetNewTarget()
-    {
-        isStopped = true;
-        yield return new WaitForSeconds(2f); // Остановка на 2 секунды
-        SetNewTargetPosition();
-        isStopped = false;
-    }
-
-    private void SetNewTargetPosition()
-    {
-        var newX = Random.Range(-walkingRadius + spritePosition.x, walkingRadius + spritePosition.x);
-        var newY = Random.Range(-walkingRadius + spritePosition.y, walkingRadius + spritePosition.y);
-        targetPosition = new Vector3(newX, newY, sprite.transform.position.z);
     }
 }
