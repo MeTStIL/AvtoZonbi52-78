@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public interface IMonster
 {
     int LivesCount { get; set; }
     float StandardSpeed { get; set; }
     float WalkingRadius { get; set; }
+    float VisibleRadius { get; set; }
     Vector3 SpritePosition { get; set; }
 
     void Awake();
@@ -15,6 +18,7 @@ public interface IMonster
     void Walking();
     IEnumerator StopAndSetNewTarget();
     void SetNewTargetPosition();
+    void StartHarassment();
 }
 
 public class Monster : MonoBehaviour, IMonster
@@ -22,12 +26,14 @@ public class Monster : MonoBehaviour, IMonster
     public int LivesCount { get; set; }
     public float StandardSpeed { get; set; }
     public float WalkingRadius { get; set; }
+    public float VisibleRadius { get; set; }
     public Vector3 SpritePosition { get; set; }
 
     private Collider2D collider;
     private SpriteRenderer sprite;
     private Vector3 targetPosition;
     private bool isStopped = false;
+    public bool isHarassment = false;
     public LayerMask obstacleLayer;
     private Rigidbody2D rb;
     public float freezeTime = 2f;
@@ -40,13 +46,50 @@ public class Monster : MonoBehaviour, IMonster
         SpritePosition = sprite.transform.position;
         SetNewTargetPosition();
     }
-
+    
     public virtual void LateUpdate()
     {
         if (isStopped)
             StartCoroutine(StopAndSetNewTarget());
         Walking();
     }
+
+    #region Преследование
+    private Transform player;
+    private float chaseRadius;
+    public void Start()
+    {
+        player = GameObject.FindWithTag("Player").transform;
+        chaseRadius = 3f * VisibleRadius;
+    }
+
+    public void Update()
+    {
+        if (Vector3.Distance(transform.position, player.position) <= VisibleRadius)
+        {
+            isHarassment = true;
+            StartHarassment();
+        }
+        else if (Vector3.Distance(transform.position, player.position) > chaseRadius)
+        {
+            isHarassment = false;
+            StopHarassment();
+        }
+    }
+
+    public void StartHarassment()
+    {
+        targetPosition = player.position;
+    }
+
+    public void StopHarassment()
+    {
+        SetNewTargetPosition();
+    }
+    
+    #endregion
+    
+    #region Житуха
 
     public virtual void Die()
     {
@@ -59,6 +102,10 @@ public class Monster : MonoBehaviour, IMonster
         if (LivesCount == 0)
             Die();
     }
+
+    #endregion
+
+    #region Движение
 
     public virtual void Walking()
     {
@@ -88,6 +135,11 @@ public class Monster : MonoBehaviour, IMonster
         targetPosition = new Vector3(newX, newY, sprite.transform.position.z);
     }
 
+
+    #endregion
+    
+    #region Заморозка при столкновениях
+
     private void Unfreeze()
     {
         // Размораживаем объект
@@ -105,4 +157,9 @@ public class Monster : MonoBehaviour, IMonster
         // Вызываем метод Unfreeze через freezeTime секунд
         Invoke("Unfreeze", freezeTime);
     }
+
+    #endregion
+    
+
+    
 }

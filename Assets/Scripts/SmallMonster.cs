@@ -10,6 +10,8 @@ public class SmallMonster : Monster
         LivesCount = 1;
         StandardSpeed = 2;
         WalkingRadius = 6;
+        VisibleRadius = 5;
         obstacleLayer = LayerMask.GetMask("Collision");
     }
+    
 }
