@@ -7606,7 +7606,7 @@ GameObject:
   - component: {fileID: 514004922}
   m_Layer: 3
   m_Name: SpriteObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12026,6 +12026,7 @@ GameObject:
   - component: {fileID: 741510601}
   - component: {fileID: 741510603}
   - component: {fileID: 741510604}
+  - component: {fileID: 741510605}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -12045,9 +12046,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3948a0b8897f984ba789c492dfd046f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <LivesCount>k__BackingField: 0
+  <StandardSpeed>k__BackingField: 0
+  <WalkingRadius>k__BackingField: 0
+  <SpritePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  collider: {fileID: 0}
+  sprite: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  isStopped: 0
   obstacleLayer:
-    serializedVersion: 2
     m_Bits: 0
+  rb: {fileID: 0}
   freezeTime: 2
 --- !u!212 &741510598
 SpriteRenderer:
@@ -12222,6 +12231,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &741510605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741510596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c9b9807253d84b4b834ec44047a531a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHarassment: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  freezeTime: 2
 --- !u!1 &744038071
 GameObject:
   m_ObjectHideFlags: 0
@@ -16605,6 +16631,7 @@ GameObject:
   - component: {fileID: 983015562}
   - component: {fileID: 983015561}
   - component: {fileID: 983015567}
+  - component: {fileID: 983015568}
   m_Layer: 0
   m_Name: Zombie (1)
   m_TagString: Untagged
@@ -16624,9 +16651,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbcfcc7dea3d3e8469bc83ee6118d13d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <LivesCount>k__BackingField: 0
+  <StandardSpeed>k__BackingField: 0
+  <WalkingRadius>k__BackingField: 0
+  <SpritePosition>k__BackingField: {x: 0, y: 0, z: 0}
+  collider: {fileID: 0}
+  sprite: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  isStopped: 0
   obstacleLayer:
-    serializedVersion: 2
     m_Bits: 0
+  rb: {fileID: 0}
   freezeTime: 2
 --- !u!50 &983015562
 Rigidbody2D:
@@ -16801,6 +16836,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &983015568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983015560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a54e0785bd9764a97b498ee000f6de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isHarassment: 0
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  freezeTime: 2
 --- !u!1 &986403478
 GameObject:
   m_ObjectHideFlags: 0

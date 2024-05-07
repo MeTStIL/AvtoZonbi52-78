@@ -12,6 +12,8 @@ public class SmallMonster : Monster
         WalkingRadius = 6;
         VisibleRadius = 5;
         obstacleLayer = LayerMask.GetMask("Collision");
+        speedAttack = 5;
+        currentSpeed = StandardSpeed;
     }
     
 }

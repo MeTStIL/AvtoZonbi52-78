@@ -6,7 +6,7 @@ namespace Player
    public class PlayerMovement : MonoBehaviour
    {
       private Rigidbody2D body;
-      [SerializeField] private float speed;
+      [SerializeField] public float speed;
       [SerializeField]private Animator animator;
       private Vector2 direction;
 

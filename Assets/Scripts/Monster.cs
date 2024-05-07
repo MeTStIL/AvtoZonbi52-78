@@ -36,6 +36,8 @@ public class Monster : MonoBehaviour, IMonster
     public bool isHarassment = false;
     public LayerMask obstacleLayer;
     private Rigidbody2D rb;
+    public float speedAttack;
+    public float currentSpeed;
     public float freezeTime = 2f;
 
     public virtual void Awake()
@@ -68,11 +70,13 @@ public class Monster : MonoBehaviour, IMonster
         if (Vector3.Distance(transform.position, player.position) <= VisibleRadius)
         {
             isHarassment = true;
+            currentSpeed = speedAttack;
             StartHarassment();
         }
         else if (Vector3.Distance(transform.position, player.position) > chaseRadius)
         {
             isHarassment = false;
+            currentSpeed = StandardSpeed;
             StopHarassment();
         }
     }
@@ -112,9 +116,9 @@ public class Monster : MonoBehaviour, IMonster
         if (Vector3.Distance(sprite.transform.position, targetPosition) > 0.1f && rb.isKinematic == false)
         {
             Vector3 direction = (targetPosition - sprite.transform.position).normalized;
-            sprite.transform.position = Vector3.MoveTowards(sprite.transform.position, targetPosition, StandardSpeed * Time.deltaTime);
+            sprite.transform.position = Vector3.MoveTowards(sprite.transform.position, targetPosition, currentSpeed * Time.deltaTime);
         }
-        else
+        else if (isHarassment == false)
         {
             StartCoroutine(StopAndSetNewTarget());
         }
@@ -145,7 +149,7 @@ public class Monster : MonoBehaviour, IMonster
         // Размораживаем объект
         rb.isKinematic = false;
         Vector3 direction = -(targetPosition - sprite.transform.position).normalized;
-        sprite.transform.position = Vector3.MoveTowards(sprite.transform.position, targetPosition, StandardSpeed * Time.deltaTime);
+        sprite.transform.position = Vector3.MoveTowards(sprite.transform.position, targetPosition, currentSpeed * Time.deltaTime);
         SetNewTargetPosition();
     }
 

@@ -9,8 +9,10 @@ public class MediumMonster : Monster
         base.Awake();
         LivesCount = Random.Range(1 ,2);
         StandardSpeed = 2;
+        speedAttack = 4;
         WalkingRadius = 6;
         VisibleRadius = 5;
         obstacleLayer = LayerMask.GetMask("Collision");
+        currentSpeed = StandardSpeed;
     }
 }
