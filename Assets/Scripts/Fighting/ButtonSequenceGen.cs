@@ -1,10 +1,18 @@
+using System.Collections.Generic;
+using UnityEngine;
 using Random = System.Random;
 
 namespace Fighting
 {
     public class ButtonSequenceGen
     {
-        public static char[] GenerateButtonSeq(string letters, int count)
+        public static Dictionary<char, KeyCode> buttons = new()
+        {
+            { 'A', KeyCode.A },
+            { 'E', KeyCode.E },
+            { 'Q', KeyCode.Q }
+        };
+    public static char[] GenerateButtonSeq(string letters, int count)
         {
             var result = new char[count];
             var random = new Random();

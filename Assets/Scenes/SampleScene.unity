@@ -10487,7 +10487,7 @@ GameObject:
   - component: {fileID: 642345988}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12046,18 +12046,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3948a0b8897f984ba789c492dfd046f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <LivesCount>k__BackingField: 0
-  <StandardSpeed>k__BackingField: 0
-  <WalkingRadius>k__BackingField: 0
-  <SpritePosition>k__BackingField: {x: 0, y: 0, z: 0}
-  collider: {fileID: 0}
-  sprite: {fileID: 0}
-  targetPosition: {x: 0, y: 0, z: 0}
-  isStopped: 0
-  obstacleLayer:
-    m_Bits: 0
-  rb: {fileID: 0}
-  freezeTime: 2
 --- !u!212 &741510598
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -12243,10 +12231,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c9b9807253d84b4b834ec44047a531a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonPrefab: {fileID: 0}
   isHarassment: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
+  speedAttack: 0
+  currentSpeed: 0
   freezeTime: 2
 --- !u!1 &744038071
 GameObject:
@@ -16651,18 +16642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbcfcc7dea3d3e8469bc83ee6118d13d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <LivesCount>k__BackingField: 0
-  <StandardSpeed>k__BackingField: 0
-  <WalkingRadius>k__BackingField: 0
-  <SpritePosition>k__BackingField: {x: 0, y: 0, z: 0}
-  collider: {fileID: 0}
-  sprite: {fileID: 0}
-  targetPosition: {x: 0, y: 0, z: 0}
-  isStopped: 0
-  obstacleLayer:
-    m_Bits: 0
-  rb: {fileID: 0}
-  freezeTime: 2
 --- !u!50 &983015562
 Rigidbody2D:
   serializedVersion: 4
@@ -16848,10 +16827,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a54e0785bd9764a97b498ee000f6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonPrefab: {fileID: 0}
   isHarassment: 0
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 0
+  speedAttack: 0
+  currentSpeed: 0
   freezeTime: 2
 --- !u!1 &986403478
 GameObject:

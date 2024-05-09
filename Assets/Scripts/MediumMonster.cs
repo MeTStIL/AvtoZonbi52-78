@@ -12,6 +12,7 @@ public class MediumMonster : Monster
         speedAttack = 4;
         WalkingRadius = 6;
         VisibleRadius = 5;
+        ButtonCount = 3;
         obstacleLayer = LayerMask.GetMask("Collision");
         currentSpeed = StandardSpeed;
     }
