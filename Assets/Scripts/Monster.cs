@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Player.Health;
 using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
@@ -55,9 +56,11 @@ public class Monster : MonoBehaviour, IMonster
     public float speedAttack;
     public float currentSpeed;
     public float freezeTime = 2f;
+    [SerializeField] public Health PlayerHealth;
 
     public virtual void Awake()
     {
+        
         sprite = GetComponent<SpriteRenderer>();
         buttonSequence = new Queue<char>();
         isButtonGenerated = false;
@@ -113,6 +116,7 @@ public class Monster : MonoBehaviour, IMonster
                     
                 buttonInstances[buttonInstances.Count - buttonSequence.Count].GetComponent<SpriteRenderer>()
                     .sprite = newSprite;
+                PlayerHealth.TakeDamage(1);
             }
         }
         
