@@ -10,7 +10,7 @@ public class SmallMonster : Monster
         LivesCount = 1;
         StandardSpeed = 2;
         WalkingRadius = 6;
-        VisibleRadius = 100;
+        VisibleRadius = 7;
         obstacleLayer = LayerMask.GetMask("Collision");
         speedAttack = 5;
         ButtonCount = 2;

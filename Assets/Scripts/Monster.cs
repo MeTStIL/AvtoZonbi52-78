@@ -83,6 +83,16 @@ public class Monster : MonoBehaviour, IMonster
         Walking();
         
         // Нажатие кнопок
+        if (buttonSequence.Count == 0)
+        {
+            isButtonGenerated = false;
+            LivesCount--;
+            buttonInstances = new List<GameObject>();
+            while (gameObject.transform.childCount > 0)
+            {
+                DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
+            }
+        }
         if (isButtonGenerated == true && buttonSequence.Count > 0)
         {
             var currentButton = Fighting.ButtonSequenceGen.buttons[buttonSequence.First()];
@@ -100,6 +110,7 @@ public class Monster : MonoBehaviour, IMonster
                     
                     buttonInstances[buttonInstances.Count - buttonSequence.Count - 1].GetComponent<SpriteRenderer>()
                         .sprite = newSprite;
+                    
                 }
                 else
                 {
@@ -140,7 +151,8 @@ public class Monster : MonoBehaviour, IMonster
             GameObject newButton = Instantiate(buttonPrefab, buttonPosition, Quaternion.identity, transform);
             SpriteRenderer buttonSpriteRenderer = newButton.GetComponent<SpriteRenderer>();
             newButton.transform.localScale = new Vector3(2, 2, 2);
-            // Устанавливаем текстуру для кнопки
+            buttonSpriteRenderer.sortingOrder = 10;
+                // Устанавливаем текстуру для кнопки
             buttonSpriteRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
             // Смещаем позицию для следующей кнопки
             buttonPosition += new Vector3(1*0.8f, 0, 0); // Примерное смещение, в зависимости от вашего дизайна
@@ -167,16 +179,28 @@ public class Monster : MonoBehaviour, IMonster
     
     public void Update()
     {
+        if (LivesCount == 0)
+            Die();
+        
+        
         
         if (Vector3.Distance(transform.position, player.position) <= VisibleRadius 
-            && isButtonGenerated == false)
+            && isButtonGenerated == false && LivesCount > 0)
         {
             GenerateButtonSequence();
         }
-        /*if (Vector3.Distance(transform.position, player.position) <= VisibleRadius)
+
+       
+        
+        // ПРЕСЛЕДОВАНИЕ
+        
+        if (Vector3.Distance(transform.position, player.position) <= VisibleRadius / 2)
         {
-            if (Vector3.Distance(transform.position, player.position) <= 5000)
-                StartCoroutine(StopTest());
+            currentSpeed = 0;
+        }
+
+        else if (Vector3.Distance(transform.position, player.position) <= VisibleRadius)
+        {
             isHarassment = true;
             currentSpeed = speedAttack;
             StartHarassment();
@@ -186,7 +210,7 @@ public class Monster : MonoBehaviour, IMonster
             isHarassment = false;
             currentSpeed = StandardSpeed;
             StopHarassment();
-        }*/
+        }
     }
 
     public void StartHarassment()
@@ -205,7 +229,7 @@ public class Monster : MonoBehaviour, IMonster
 
     public virtual void Die()
     {
-        Destroy(gameObject, 1.4f);
+        Destroy(gameObject, 0.3f);
     }
 
     public virtual void GetDamage()
@@ -268,11 +292,15 @@ public class Monster : MonoBehaviour, IMonster
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        rb.isKinematic = true;
-        // Останавливаем объект
-        rb.velocity = Vector2.zero;
-        // Вызываем метод Unfreeze через freezeTime секунд
-        Invoke("Unfreeze", freezeTime);
+        if (!collision.gameObject.CompareTag("Zombie"))
+        {
+            rb.isKinematic = true;
+            // Останавливаем объект
+            rb.velocity = Vector2.zero;
+            // Вызываем метод Unfreeze через freezeTime секунд
+            Invoke("Unfreeze", freezeTime);
+        }
+        
     }
 
     #endregion
