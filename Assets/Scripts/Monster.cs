@@ -96,7 +96,7 @@ public class Monster : MonoBehaviour, IMonster
             PlayerHealth.TakeDamage(1);
         }
         // Нажатие кнопок
-        else if (buttonSequence.Count == 0)
+        else if (buttonSequence.Count == 0 && isButtonGenerated == true)
         {
             isButtonGenerated = false;
             LivesCount--;

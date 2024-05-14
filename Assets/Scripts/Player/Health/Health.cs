@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Player.Health
 {
@@ -17,14 +18,8 @@ namespace Player.Health
         {
             currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
 
-            if (currentHealth > 0)
-            {
-                
-            }
-            else
-            {
-                
-            }
+            if (currentHealth == 0)
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         private void Update()
