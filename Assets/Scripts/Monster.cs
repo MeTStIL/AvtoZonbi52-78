@@ -57,6 +57,7 @@ public class Monster : MonoBehaviour, IMonster
     public float currentSpeed;
     public float freezeTime = 2f;
     [SerializeField] public Health PlayerHealth;
+    public float timeForAttack;
 
     public virtual void Awake()
     {
@@ -81,9 +82,21 @@ public class Monster : MonoBehaviour, IMonster
         if (isStopped)
             StartCoroutine(StopAndSetNewTarget());
         Walking();
-        
+        if (Time.time - timeForAttack > 2f)
+        {
+            isButtonGenerated = false;
+            buttonInstances = new List<GameObject>();
+            buttonSequence = new Queue<char>();
+            while (gameObject.transform.childCount > 0)
+            {
+                DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
+            }
+
+            timeForAttack = Time.time;
+            PlayerHealth.TakeDamage(1);
+        }
         // Нажатие кнопок
-        if (buttonSequence.Count == 0)
+        else if (buttonSequence.Count == 0)
         {
             isButtonGenerated = false;
             LivesCount--;
@@ -188,6 +201,7 @@ public class Monster : MonoBehaviour, IMonster
             && isButtonGenerated == false && LivesCount > 0)
         {
             GenerateButtonSequence();
+            timeForAttack = Time.time;
         }
 
        
