@@ -8,9 +8,10 @@ namespace Fighting
     {
         public static Dictionary<char, KeyCode> buttons = new()
         {
-            { 'A', KeyCode.A },
+            //{ 'A', KeyCode.A },
             { 'E', KeyCode.E },
-            { 'Q', KeyCode.Q }
+            { 'Q', KeyCode.Q },
+            { 'Z', KeyCode.Z }
         };
     public static char[] GenerateButtonSeq(string letters, int count)
         {
