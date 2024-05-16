@@ -9241,9 +9241,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.22
   far clip plane: 1000
-  field of view: 60
+  field of view: 45.2
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -96689,7 +96689,6 @@ SpriteRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 793252992}
   - {fileID: 623259923}
   - {fileID: 719665739}
   - {fileID: 282241701}

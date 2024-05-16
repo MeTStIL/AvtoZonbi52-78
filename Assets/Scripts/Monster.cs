@@ -12,8 +12,8 @@ public interface IMonster
 {
     int LivesCount { get; set; }
     float StandardSpeed { get; set; }
-    float WalkingRadius { get; set; }
-    float VisibleRadius { get; set; }
+    //float WalkingRadius { get; set; }
+    //float VisibleRadius { get; set; }
     Vector3 SpritePosition { get; set; }
     public int ButtonCount { get; set; }
     bool isButtonGenerated { get; set; }
@@ -35,14 +35,15 @@ public class Monster : MonoBehaviour, IMonster
     
     public int LivesCount { get; set; }
     public float StandardSpeed { get; set; }
-    public float WalkingRadius { get; set; }
-    public float VisibleRadius { get; set; }
+    [SerializeField] private float WalkingRadius;
+    [SerializeField] public float VisibleRadius;
+    [SerializeField] public bool IsStatic;
     public int ButtonCount { get; set; }
     public Vector3 SpritePosition { get; set; }
     public bool isButtonGenerated { get; set; }
     public Queue<char> buttonSequence { get; set; }
 
-    private static string letters = "AEQ";
+    private static string letters = "ZEQ";
     private static Dictionary<string, Texture2D> buttonTextures;
     private List<GameObject> buttonInstances = new List<GameObject>();
     private Collider2D collider;
@@ -61,7 +62,7 @@ public class Monster : MonoBehaviour, IMonster
 
     public virtual void Awake()
     {
-        
+        //START SETTINGS
         sprite = GetComponent<SpriteRenderer>();
         buttonSequence = new Queue<char>();
         isButtonGenerated = false;
@@ -71,41 +72,38 @@ public class Monster : MonoBehaviour, IMonster
         SetNewTargetPosition();
         buttonPrefab = Resources.Load<GameObject>("button");
         if (buttonPrefab == null)
-        {
             Debug.LogError("Не удалось загрузить префаб кнопки!");
-        }
         buttonTextures = Fighting.LettersTo2DTextures.ConnectCharWithTexture(letters);
     }
 
-    public virtual void LateUpdate()
+    private void CheckTimeToAttack()
     {
-        if (isStopped)
-            StartCoroutine(StopAndSetNewTarget());
-        Walking();
-        if (Time.time - timeForAttack > 2f)
+        isButtonGenerated = false;
+        buttonInstances = new List<GameObject>();
+        buttonSequence = new Queue<char>();
+        while (gameObject.transform.childCount > 0)
         {
-            isButtonGenerated = false;
-            buttonInstances = new List<GameObject>();
-            buttonSequence = new Queue<char>();
-            while (gameObject.transform.childCount > 0)
-            {
-                DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
-            }
+            DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
+        }
 
-            timeForAttack = Time.time;
-            PlayerHealth.TakeDamage(1);
-        }
-        // Нажатие кнопок
-        else if (buttonSequence.Count == 0 && isButtonGenerated == true)
+        timeForAttack = Time.time;
+        PlayerHealth.TakeDamage(1);
+        
+    }
+
+    private void GiveDamageToMonster()
+    {
+        isButtonGenerated = false;
+        LivesCount--;
+        buttonInstances = new List<GameObject>();
+        while (gameObject.transform.childCount > 0)
         {
-            isButtonGenerated = false;
-            LivesCount--;
-            buttonInstances = new List<GameObject>();
-            while (gameObject.transform.childCount > 0)
-            {
-                DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
-            }
+            DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
         }
+    }
+
+    private void CheckForCorrectClick()
+    {
         if (isButtonGenerated == true && buttonSequence.Count > 0)
         {
             var currentButton = Fighting.ButtonSequenceGen.buttons[buttonSequence.First()];
@@ -130,7 +128,7 @@ public class Monster : MonoBehaviour, IMonster
                     Debug.Log("с текстурами прроблема");
                 }
             }
-            else if (Input.anyKeyDown)
+            else if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
             {
                 Debug.Log("Загрузили текстурку");
                 var texture = buttonTextures[currentButton + "cancel"];
@@ -143,9 +141,25 @@ public class Monster : MonoBehaviour, IMonster
                 PlayerHealth.TakeDamage(1);
             }
         }
-        
-            
-        
+    }
+
+    private void CheckForAttack()
+    {
+        if (isButtonGenerated)
+        {
+            if (Time.time - timeForAttack > 2f)
+                CheckTimeToAttack();
+            else if (buttonSequence.Count == 0)
+                GiveDamageToMonster();
+        }
+    }
+    public virtual void LateUpdate()
+    {
+        if (isStopped)
+            StartCoroutine(StopAndSetNewTarget());
+        Walking();
+        CheckForAttack();
+        CheckForCorrectClick();
     }
 
     #region Buttons
@@ -194,9 +208,6 @@ public class Monster : MonoBehaviour, IMonster
     {
         if (LivesCount == 0)
             Die();
-        
-        
-        
         if (Vector3.Distance(transform.position, player.position) <= VisibleRadius 
             && isButtonGenerated == false && LivesCount > 0)
         {
@@ -207,23 +218,25 @@ public class Monster : MonoBehaviour, IMonster
        
         
         // ПРЕСЛЕДОВАНИЕ
-        
-        if (Vector3.Distance(transform.position, player.position) <= VisibleRadius / 2)
+        if (!IsStatic)
         {
-            currentSpeed = 0;
-        }
+            if (Vector3.Distance(transform.position, player.position) <= VisibleRadius / 2)
+            {
+                currentSpeed = 0;
+            }
 
-        else if (Vector3.Distance(transform.position, player.position) <= VisibleRadius)
-        {
-            isHarassment = true;
-            currentSpeed = speedAttack;
-            StartHarassment();
-        }
-        else if (Vector3.Distance(transform.position, player.position) > chaseRadius)
-        {
-            isHarassment = false;
-            currentSpeed = StandardSpeed;
-            StopHarassment();
+            else if (Vector3.Distance(transform.position, player.position) <= VisibleRadius)
+            {
+                isHarassment = true;
+                currentSpeed = speedAttack;
+                StartHarassment();
+            }
+            else if (Vector3.Distance(transform.position, player.position) > chaseRadius)
+            {
+                isHarassment = false;
+                currentSpeed = StandardSpeed;
+                StopHarassment();
+            }
         }
     }
 
