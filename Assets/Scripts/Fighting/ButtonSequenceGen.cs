@@ -24,5 +24,15 @@ namespace Fighting
             }
             return result;
         }
+
+    public static char GenerateButton(string letters)
+    {
+        var random = new Random();
+        return letters[random.Next(0, letters.Length)];
+    } 
+    
     }
+    
+    
+    
 }
