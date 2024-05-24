@@ -26,7 +26,7 @@ namespace Fighting
             return result;
         }
         
-        private static Texture2D LoadTextureFromPath(string path)
+        public static Texture2D LoadTextureFromPath(string path)
         {
             Texture2D texture = null;
             byte[] fileData;
