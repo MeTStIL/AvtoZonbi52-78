@@ -37,7 +37,7 @@ public class Boss_buttons_generator : MonoBehaviour
     
     private void Update()
     {
-        if (bossHeath > 0 && buttons.Count-deletedButtons.Count < buttonsLimit && timeStart > 1f)
+        if (bossHeath > 0 && buttons.Count-deletedButtons.Count < buttonsLimit && timeStart > 0.5f)
         {
             GenerateButton();
             timeStart = Time.deltaTime;
@@ -45,14 +45,38 @@ public class Boss_buttons_generator : MonoBehaviour
 
         foreach (var genButton in buttons)
         {
+            if (!deletedButtons.Contains(genButton.Key))
+            {
+                if (genButton.Key.transform.localScale.x < 3.3f)
+                {
+                    deletedButtons.Add(genButton.Key);
+                    var texture = buttonTextures[genButton.Value + "cancel"];
+                    var currentSprite = genButton.Key;
+                    Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),Vector2.zero);
+                    
+                    genButton.Key.GetComponent<SpriteRenderer>()
+                        .sprite = newSprite;
+                    //
+                    Destroy(genButton.Key, 0.3f);
+                    
+                }
+            }
             if (Input.GetKeyDown(genButton.Value) && !deletedButtons.Contains(genButton.Key)) 
             {
                 Debug.Log("ПРАВИЛЬНО НАЖАЛ");
                 deletedButtons.Add(genButton.Key);
                 var position = genButton.Key.transform.position;
                 Debug.Log(position);
-                //buttonsCoord.Remove(( position.x, position.y));
-                DestroyImmediate(genButton.Key);
+                
+                //ЦВЕТ
+                var texture = buttonTextures[genButton.Value + "apply"];
+                var currentSprite = genButton.Key;
+                Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),Vector2.zero);
+                    
+                genButton.Key.GetComponent<SpriteRenderer>()
+                    .sprite = newSprite;
+                //
+                Destroy(genButton.Key, 0.3f);
                 break;
 
             }
@@ -62,7 +86,7 @@ public class Boss_buttons_generator : MonoBehaviour
         // УМЕНЬШЕНИЕ КНОПОК
         foreach (var button in buttons.Keys.Where((k, v) => !deletedButtons.Contains(k)))
         {
-            button.transform.localScale = button.transform.localScale * 0.999f;
+            button.transform.localScale = button.transform.localScale * 0.995f;
             var buttonSprite = button.GetComponent<SpriteRenderer>();
             var color = buttonSprite.color;
             color.a -= 0.005f;
@@ -74,7 +98,7 @@ public class Boss_buttons_generator : MonoBehaviour
     {
         Debug.Log(buttons.Count - deletedButtons.Count);
         var koef = 0.3f;
-        var buttonSize = 4f;
+        var buttonSize = 5f;
         var button = Fighting.ButtonSequenceGen.GenerateButton(letters);
         var random = new Random();
         Vector3 buttonPosition =sprite.transform.position + new Vector3(random.Next(-5, 5), random.Next(-2, 4), 0);
