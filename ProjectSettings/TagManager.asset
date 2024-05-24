@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Zombie
   - Target
+  - BackGround
+  - Buttons
   layers:
   - Default
   - TransparentFX
@@ -55,4 +57,7 @@ TagManager:
     locked: 0
   - name: ForeGround
     uniqueID: 1056617937
+    locked: 0
+  - name: button
+    uniqueID: 2846546803
     locked: 0
