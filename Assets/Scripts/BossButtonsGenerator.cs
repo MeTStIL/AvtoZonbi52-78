@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,12 +18,14 @@ public class Boss_buttons_generator : MonoBehaviour
     private HashSet<(float, float)> buttonsCoord;
     private SpriteRenderer sprite;
     private float timeStart;
-    private HashSet<GameObject> buttons;
+    private Dictionary<GameObject, KeyCode> buttons;
+    private HashSet<GameObject> deletedButtons;
     
     private void Awake()
     {
         timeStart = Time.deltaTime;
-        buttons = new HashSet<GameObject>();
+        deletedButtons = new HashSet<GameObject>();
+        buttons = new Dictionary<GameObject, KeyCode>();
         sprite = GetComponent<SpriteRenderer>();
         buttonsCoord = new HashSet<(float, float)>();
         bossHeath = 10;
@@ -34,25 +37,44 @@ public class Boss_buttons_generator : MonoBehaviour
     
     private void Update()
     {
-        if (bossHeath > 0 && buttonsCoord.Count < buttonsLimit && timeStart > 1f)
+        if (bossHeath > 0 && buttons.Count-deletedButtons.Count < buttonsLimit && timeStart > 1f)
         {
             GenerateButton();
             timeStart = Time.deltaTime;
         }
 
+        foreach (var genButton in buttons)
+        {
+            if (Input.GetKeyDown(genButton.Value) && !deletedButtons.Contains(genButton.Key)) 
+            {
+                Debug.Log("ПРАВИЛЬНО НАЖАЛ");
+                deletedButtons.Add(genButton.Key);
+                var position = genButton.Key.transform.position;
+                Debug.Log(position);
+                //buttonsCoord.Remove(( position.x, position.y));
+                DestroyImmediate(genButton.Key);
+                break;
+
+            }
+        }
+
         timeStart += Time.deltaTime;
         // УМЕНЬШЕНИЕ КНОПОК
-        foreach (var button in buttons)
+        foreach (var button in buttons.Keys.Where((k, v) => !deletedButtons.Contains(k)))
         {
-            button.transform.localScale = button.transform.localScale * 0.9999f;
+            button.transform.localScale = button.transform.localScale * 0.999f;
+            var buttonSprite = button.GetComponent<SpriteRenderer>();
+            var color = buttonSprite.color;
+            color.a -= 0.005f;
+            buttonSprite.color = color;
         }
     }
     
     public void GenerateButton()
     {
-        Debug.Log(buttonsCoord.Count);
+        Debug.Log(buttons.Count - deletedButtons.Count);
         var koef = 0.3f;
-        var buttonSize = 3f;
+        var buttonSize = 4f;
         var button = Fighting.ButtonSequenceGen.GenerateButton(letters);
         var random = new Random();
         Vector3 buttonPosition =sprite.transform.position + new Vector3(random.Next(-5, 5), random.Next(-2, 4), 0);
@@ -68,16 +90,18 @@ public class Boss_buttons_generator : MonoBehaviour
             // Устанавливаем текстуру для кнопки
             buttonSpriteRenderer.sprite =
                 Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
-            buttons.Add(newButton);
+            buttons[newButton] = Fighting.ButtonSequenceGen.buttons[button];
         }
     }
 
     private bool IsCollidesWithButtons(Vector3 buttonPosition, float buttonSize)
     {
-        foreach (var button in buttonsCoord)
+        foreach (var button in buttons.Keys.Where((k, v) => !deletedButtons.Contains(k)))
         {
-            var diffX = Math.Abs(button.Item1 - buttonPosition.x);
-            var diffY = Math.Abs(button.Item2 - buttonPosition.y);
+            var x = button.transform.position.x;
+            var y = button.transform.position.y;
+            var diffX = Math.Abs(x - buttonPosition.x);
+            var diffY = Math.Abs(y - buttonPosition.y);
             if (diffX <= 1.5 && diffY < 1.5)
                 return true;
         }
