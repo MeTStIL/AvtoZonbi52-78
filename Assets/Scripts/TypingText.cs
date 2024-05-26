@@ -7,9 +7,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.WSA;
 
-public class TypingText : MonoBehaviour
+public class TypingText : Sounds
 {
+    private float startTime;
+    [SerializeField] private GameObject skipButton;
+    [SerializeField] private GameObject skipText;
     public float delay = 0.1f;
+    private readonly float visabilityCoef = 0.1f;
     private string messagesPath;
     private List<string> messages;
     private string imagesPath;
@@ -25,7 +29,7 @@ public class TypingText : MonoBehaviour
         messages = ImageMessageConvertion.GetTexts(messagesPath);
         images = ImageMessageConvertion.GetImages(imagesPath);
         isActive = false;
-        
+        startTime = Time.deltaTime;
         textComp = GetComponent<Text>();
         textComp.text = "";
         Debug.Log(messages.Count);
@@ -37,30 +41,46 @@ public class TypingText : MonoBehaviour
     IEnumerator ShowText(int index)
     {
         textComp.text = "";
-        image.sprite = Sprite.Create(images[index], new Rect(0, 0, images[index].width, images[index].height), Vector2.zero);
-        image.color = Color.white;
+        SetImage(index);
         isActive = true;
-        foreach (char c in messages[index])
+        for (var i = 0; i < messages[index].Length; i++)
         {
+            var c = messages[index][i];
+            IncreaseImageVisibility();
             textComp.text += c;
+            if (i % 2 == 0)
+                PlaySound(objectSounds[0]);
             yield return new WaitForSeconds(delay);
         }
 
         StartCoroutine(Delay(2));
         
-        
+    }
+
+    private void SetImage(int index)
+    {
+        image.sprite = Sprite.Create(images[index], new Rect(0, 0, images[index].width, images[index].height), Vector2.zero);
+        image.color = Color.white;
+        var color = image.color;
+        color.a = 0;
+        image.color = color;
+    }
+
+    private void IncreaseImageVisibility()
+    {
+        var color = image.color;
+        color.a += visabilityCoef;
+        image.color = color;
     }
 
     private void Update()
     {
-        if (currentIndex == 4)
-        {
-            StartCoroutine(Delay(2));
-            SceneManager.LoadScene(1);
-        }
+        EnableExitButton();
+        MoveToNextScene();
         if (!isActive && currentIndex < 4)
             StartCoroutine(ShowText(currentIndex));
-        
+        if (Input.GetKeyDown(KeyCode.Q) && Math.Abs(startTime - 3f) < 0.3f)
+            SceneManager.LoadScene(1);
     }
     
     IEnumerator Delay(float seconds)
@@ -68,5 +88,25 @@ public class TypingText : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         currentIndex += 1;
         isActive = false;
+    }
+    IEnumerator StartDelay(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        isActive = false;
+    }
+
+    private void MoveToNextScene()
+    {
+        
+        if (currentIndex != 4) return;
+        StartCoroutine(Delay(2));
+        SceneManager.LoadScene(1);
+    }
+    private void EnableExitButton()
+    {
+        startTime += Time.deltaTime;
+        if (!(Math.Abs(startTime - 3f) < 0.3f)) return;
+        skipButton.SetActive(true);
+        skipText.SetActive(true);
     }
 }
