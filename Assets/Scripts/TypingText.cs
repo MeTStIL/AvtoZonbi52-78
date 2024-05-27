@@ -79,8 +79,8 @@ public class TypingText : Sounds
         MoveToNextScene();
         if (!isActive && currentIndex < 4)
             StartCoroutine(ShowText(currentIndex));
-        if (Input.GetKeyDown(KeyCode.Q) && Math.Abs(startTime - 3f) < 0.3f)
-            SceneManager.LoadScene(1);
+        if (Input.GetKeyDown(KeyCode.Q))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
     
     IEnumerator Delay(float seconds)
@@ -100,7 +100,7 @@ public class TypingText : Sounds
         
         if (currentIndex != 4) return;
         StartCoroutine(Delay(2));
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
     private void EnableExitButton()
     {
