@@ -1,14 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogSystem : MonoBehaviour
 {
+    [SerializeField] private bool startEducation;
+    [SerializeField] private GameObject[] objectsToSpawn;
+    [SerializeField] private GameObject destroyableObject;
+    [SerializeField] private GameObject CollisionToOpen;
     public string[] lines;
     public GameObject MovementTips;
     public GameObject ContinueDialog;
+    public GameObject FightingTips;
     public float speedText;
     public Text dialogText;
     public int index;
@@ -45,25 +51,22 @@ public class DialogSystem : MonoBehaviour
         {
             index++;
         } 
-        else 
+        else
         {
-            index=0;
+            StopAllCoroutines();
+            if (objectsToSpawn.Length > 0)
+                foreach (var mob in objectsToSpawn)
+                    mob.SetActive(true);
+            FightingTips.SetActive(true);
+            CollisionToOpen.SetActive(false);
+            Destroy(destroyableObject);
         }
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && ContinueDialog != null)
-            DestroyImmediate(ContinueDialog);
-        if ( ContinueDialog != null && index == 0 && !isDialogActive)
-        {
-            ContinueDialog.SetActive(true);
-        }
-        if ( MovementTips != null && index == 2 && !isDialogActive)
-        {
-            MovementTips.SetActive(true);
-        }
-        
+        if (startEducation)
+            MakeStartEducation();
 
         if (Input.GetKeyDown(KeyCode.Space) && MovementTips != null && MovementTips.activeSelf) return;
         if (!Input.GetKeyDown(KeyCode.Space)) return;
@@ -79,5 +82,20 @@ public class DialogSystem : MonoBehaviour
             NextLines();
             StartDialog();
         }
+    }
+
+    private void MakeStartEducation()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && ContinueDialog != null)
+            DestroyImmediate(ContinueDialog);
+        if ( ContinueDialog != null && index == 0 && !isDialogActive)
+        {
+            ContinueDialog.SetActive(true);
+        }
+        if ( MovementTips != null && index == 2 && !isDialogActive)
+        {
+            MovementTips.SetActive(true);
+        }
+        
     }
 }

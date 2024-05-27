@@ -59,10 +59,12 @@ public class Monster : MonoBehaviour, IMonster
     public float freezeTime = 2f;
     [SerializeField] public Health PlayerHealth;
     public float timeForAttack;
+    private bool isDead;
 
     public virtual void Awake()
     {
         //START SETTINGS
+        isDead = false;
         sprite = GetComponent<SpriteRenderer>();
         buttonSequence = new Queue<char>();
         isButtonGenerated = false;
@@ -207,7 +209,13 @@ public class Monster : MonoBehaviour, IMonster
     public void Update()
     {
         if (LivesCount == 0)
+        {
+            if (isDead!)
+                PlayerStats.kills += 1;
+            Debug.Log(PlayerStats.kills);
             Die();
+        }
+
         if (Vector3.Distance(transform.position, player.position) <= VisibleRadius 
             && isButtonGenerated == false && LivesCount > 0)
         {
@@ -256,14 +264,13 @@ public class Monster : MonoBehaviour, IMonster
 
     public virtual void Die()
     {
+        isDead = true;
         Destroy(gameObject, 0.3f);
     }
 
     public virtual void GetDamage()
     {
         LivesCount -= 1;
-        if (LivesCount == 0)
-            Die();
     }
 
     #endregion
