@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Player;
 using Player.Health;
 using Unity.VisualScripting;
 using UnityEditor.Build;
@@ -60,6 +61,7 @@ public class Monster : Sounds, IMonster
     [SerializeField] public Health PlayerHealth;
     public float timeForAttack;
     private bool isDead;
+    private bool isSound;
 
     public virtual void Awake()
     {
@@ -253,6 +255,8 @@ public class Monster : Sounds, IMonster
                 StopHarassment();
             }
         }
+
+        CheckForDistance();
     }
 
     public void StartHarassment()
@@ -352,6 +356,18 @@ public class Monster : Sounds, IMonster
 
     #endregion
     
+    private void CheckForDistance()
+    {
+        if (!(Vector3.Distance(transform.position, player.position) <= 2f) || isSound) return;
+        isSound = true;
+        PlaySound(objectSounds[3]);
+        StartCoroutine(StopSound());
+    }
 
-    
+    IEnumerator StopSound()
+    {
+        yield return new WaitForSeconds(objectSounds[3].length); // Wait for the sound to finish playing
+        isSound = false;
+    }
+
 }

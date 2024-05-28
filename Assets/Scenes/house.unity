@@ -11468,7 +11468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8735103280827965622, guid: 9b0ca608216545e41af1f70826dc682f, type: 3}
       propertyPath: objectSounds.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8735103280827965622, guid: 9b0ca608216545e41af1f70826dc682f, type: 3}
       propertyPath: objectSounds.Array.data[0]
@@ -11485,7 +11485,7 @@ PrefabInstance:
     - target: {fileID: 8735103280827965622, guid: 9b0ca608216545e41af1f70826dc682f, type: 3}
       propertyPath: objectSounds.Array.data[3]
       value: 
-      objectReference: {fileID: 8300000, guid: b04bff66124a374489f1583817503939, type: 3}
+      objectReference: {fileID: 8300000, guid: 60ad3d754c98cb44bbb2b632b1a61afb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12433,7 +12433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8735103280827965622, guid: 9b0ca608216545e41af1f70826dc682f, type: 3}
       propertyPath: objectSounds.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8735103280827965622, guid: 9b0ca608216545e41af1f70826dc682f, type: 3}
       propertyPath: objectSounds.Array.data[0]
@@ -12447,6 +12447,10 @@ PrefabInstance:
       propertyPath: objectSounds.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 81f7dda7b74a63045a64a2994929984c, type: 3}
+    - target: {fileID: 8735103280827965622, guid: 9b0ca608216545e41af1f70826dc682f, type: 3}
+      propertyPath: objectSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 60ad3d754c98cb44bbb2b632b1a61afb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13318,7 +13322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8735103280827965622, guid: 9b0ca608216545e41af1f70826dc682f, type: 3}
       propertyPath: objectSounds.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8735103280827965622, guid: 9b0ca608216545e41af1f70826dc682f, type: 3}
       propertyPath: objectSounds.Array.data[0]
@@ -13332,6 +13336,10 @@ PrefabInstance:
       propertyPath: objectSounds.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 81f7dda7b74a63045a64a2994929984c, type: 3}
+    - target: {fileID: 8735103280827965622, guid: 9b0ca608216545e41af1f70826dc682f, type: 3}
+      propertyPath: objectSounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 60ad3d754c98cb44bbb2b632b1a61afb, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

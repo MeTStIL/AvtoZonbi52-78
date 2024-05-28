@@ -43,10 +43,9 @@ public class DialogSystem : Sounds
             
             if (i % 2 == 0)
             {
-                PlaySound(objectSounds[0], volume: 0.2f, fadeInTime: 0);
+                PlaySound(objectSounds[0], volume: 0.8f, fadeInTime: 0);
             }
         }
-
         isDialogActive = false;
     }
     

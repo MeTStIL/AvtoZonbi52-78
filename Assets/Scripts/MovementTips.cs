@@ -16,7 +16,7 @@ public class MovementTips : Sounds
     
     private void Update()
     {
-        if (correctCount < 4)
+        if (correctCount <= 4)
         {
             for (var i = 0; i < buttons.Length; i++)
             {
