@@ -9,7 +9,7 @@ public class DialogSystem : MonoBehaviour
 {
     [SerializeField] private bool startEducation;
     [SerializeField] private GameObject[] objectsToSpawn;
-    [SerializeField] private GameObject destroyableObject;
+    [SerializeField] private GameObject[] destroyableObjects;
     [SerializeField] private GameObject CollisionToOpen;
     public string[] lines;
     public GameObject MovementTips;
@@ -53,16 +53,30 @@ public class DialogSystem : MonoBehaviour
         } 
         else
         {
-            StopAllCoroutines();
             if (objectsToSpawn.Length > 0)
-                foreach (var mob in objectsToSpawn)
-                    mob.SetActive(true);
-            FightingTips.SetActive(true);
-            CollisionToOpen.SetActive(false);
-            Destroy(destroyableObject);
+                SpawnObjects();
+            StopAllCoroutines();
+            if (startEducation)
+            {
+                
+                FightingTips.SetActive(true);
+                CollisionToOpen.SetActive(false);
+            }
+
+            foreach (var destroyableObject in destroyableObjects)
+            {
+                Destroy(destroyableObject);
+            }
+            
         }
     }
 
+    private void SpawnObjects()
+    {
+        Debug.Log("СПАВНЮ");
+        foreach (var obj in objectsToSpawn)
+            obj.SetActive(true);
+    }
     public void Update()
     {
         if (startEducation)

@@ -8,6 +8,7 @@ public class Exit : MonoBehaviour
 {
     [CanBeNull][SerializeField] private GameObject exitCollision;
     [SerializeField] private int killsCount;
+    [SerializeField] [CanBeNull] private GameObject dialog;
 
     public void GetAccess()
     {
@@ -18,6 +19,12 @@ public class Exit : MonoBehaviour
     private void Update()
     {
         if (PlayerStats.kills >= killsCount)
-            GetAccess();
+        {
+            if (dialog != null)
+                dialog.SetActive(true);
+            else
+                GetAccess();
+            
+        }
     }
 }
