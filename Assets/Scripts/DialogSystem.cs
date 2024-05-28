@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogSystem : MonoBehaviour
+public class DialogSystem : Sounds
 {
     [SerializeField] private bool startEducation;
     [SerializeField] private GameObject[] objectsToSpawn;
@@ -36,10 +36,15 @@ public class DialogSystem : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        foreach (var c in lines[index]) 
+        for (int i = 0; i < lines[index].Length; i++)
         {
-            dialogText.text += c;
-            yield return new WaitForSeconds (speedText);
+            dialogText.text += lines[index][i];
+            yield return new WaitForSeconds(speedText);
+            
+            if (i % 2 == 0)
+            {
+                PlaySound(objectSounds[0], volume: 0.2f, fadeInTime: 0);
+            }
         }
 
         isDialogActive = false;

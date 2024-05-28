@@ -30,7 +30,7 @@ public interface IMonster
     void GenerateButtonSequence();
 }
 
-public class Monster : MonoBehaviour, IMonster
+public class Monster : Sounds, IMonster
 {
     
     public int LivesCount { get; set; }
@@ -89,6 +89,7 @@ public class Monster : MonoBehaviour, IMonster
         }
 
         timeForAttack = Time.time;
+        PlaySound(objectSounds[0]);
         PlayerHealth.TakeDamage(1);
         
     }
@@ -108,6 +109,7 @@ public class Monster : MonoBehaviour, IMonster
     {
         if (isButtonGenerated == true && buttonSequence.Count > 0)
         {
+            
             var currentButton = Fighting.ButtonSequenceGen.buttons[buttonSequence.First()];
             if (Input.GetKeyDown(currentButton))
             {
@@ -115,6 +117,7 @@ public class Monster : MonoBehaviour, IMonster
                 buttonSequence.Dequeue();
                 if (buttonTextures.ContainsKey(currentButton.ToString() + "apply"))
                 {
+                    PlaySound(objectSounds[2], volume: 0.5f, fadeInTime: 0);
                     Debug.Log("Загрузили текстурку");
                     var texture = buttonTextures[currentButton + "apply"];
                     var currentSprite = buttonInstances[buttonInstances.Count - buttonSequence.Count - 1];
@@ -140,6 +143,7 @@ public class Monster : MonoBehaviour, IMonster
                     
                 buttonInstances[buttonInstances.Count - buttonSequence.Count].GetComponent<SpriteRenderer>()
                     .sprite = newSprite;
+                PlaySound(objectSounds[0], volume: 0.5f, fadeInTime: 0);
                 PlayerHealth.TakeDamage(1);
             }
         }
@@ -157,9 +161,8 @@ public class Monster : MonoBehaviour, IMonster
     }
     public virtual void LateUpdate()
     {
-        if (LivesCount == 0 && !isDead)
+        if (LivesCount == 0)
         {
-            PlayerStats.kills += 1;
             isDead = true;
         }
 
@@ -268,12 +271,18 @@ public class Monster : MonoBehaviour, IMonster
 
     public virtual void Die()
     {
-        
+        if (isDead)
+            return;
+
+        isDead = true;
         Destroy(gameObject, 0.3f);
+        PlayerStats.kills += 1;
+        AudioSource.PlayClipAtPoint(objectSounds[1], transform.position, 0.8f);
     }
 
     public virtual void GetDamage()
     {
+        
         LivesCount -= 1;
     }
 

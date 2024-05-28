@@ -13,11 +13,9 @@ public class CheckpointManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(currentCheckpointIndex);
         // Проверяем, достиг ли игрок текущего чекпойнта
         if (checkpoints.Count > 0 && Vector3.Distance(player.transform.position, checkpoints[currentCheckpointIndex].position) < reachDistance)
         {
-            Debug.Log("Дошёл");
             // Переходим к следующему чекпойнту
             currentCheckpointIndex++;
             if (currentCheckpointIndex >= checkpoints.Count)
