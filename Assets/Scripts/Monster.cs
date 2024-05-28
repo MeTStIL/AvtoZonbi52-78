@@ -157,6 +157,12 @@ public class Monster : MonoBehaviour, IMonster
     }
     public virtual void LateUpdate()
     {
+        if (LivesCount == 0 && !isDead)
+        {
+            PlayerStats.kills += 1;
+            isDead = true;
+        }
+
         if (isStopped)
             StartCoroutine(StopAndSetNewTarget());
         Walking();
@@ -210,8 +216,6 @@ public class Monster : MonoBehaviour, IMonster
     {
         if (LivesCount == 0)
         {
-            if (isDead!)
-                PlayerStats.kills += 1;
             Debug.Log(PlayerStats.kills);
             Die();
         }
@@ -264,7 +268,7 @@ public class Monster : MonoBehaviour, IMonster
 
     public virtual void Die()
     {
-        isDead = true;
+        
         Destroy(gameObject, 0.3f);
     }
 
