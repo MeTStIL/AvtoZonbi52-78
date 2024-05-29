@@ -9,7 +9,7 @@ using UnityEngine.UI;
 using Random = System.Random;
 using UnityEngine.SceneManagement;
 
-public class Boss_buttons_generator : MonoBehaviour
+public class Boss_buttons_generator : Sounds
 {
     [SerializeField] private RawImage bossHealthBar;
     [SerializeField] private RawImage playerHealthBar;
@@ -89,19 +89,18 @@ public class Boss_buttons_generator : MonoBehaviour
             if (Input.GetKeyDown(genButton.Value) && !deletedButtons.Contains(genButton.Key)) 
             {
                 Debug.Log("ПРАВИЛЬНО НАЖАЛ");
+                
                 isButtonCorrect = true;
                 deletedButtons.Add(genButton.Key);
                 var position = genButton.Key.transform.position;
                 Debug.Log(position);
 
                 ChangeButtonColor(genButton.Key, genButton.Value, "apply");
+                PlaySound(objectSounds[0], volume: 0.8f, fadeInTime: 0f);
                 applyButtonsCount += 1;
                 Destroy(genButton.Key, 0.3f);
                 break;
-
             }
-
-            
         }
         if (!isButtonCorrect && Input.anyKeyDown && !isDelay)
             DamagePlayer();
@@ -155,6 +154,7 @@ public class Boss_buttons_generator : MonoBehaviour
 
     private void MakeSecondWave()
     {
+        PlaySound(objectSounds[1]);
         buttonDecreaseKoef = new Vector3(0.005f, 0.005f, 0.005f);
         isSecondWave = true;
         MakeWaveDelay();
@@ -162,6 +162,7 @@ public class Boss_buttons_generator : MonoBehaviour
     
     private void MakeLastWave()
     {
+        PlaySound(objectSounds[2]);
         buttonDecreaseKoef = new Vector3(0.006f, 0.006f, 0.006f);
         isLastWave = true;
         buttonsToDamage = 20;
