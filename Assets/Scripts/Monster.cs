@@ -44,7 +44,7 @@ public class Monster : Sounds, IMonster
     public bool isButtonGenerated { get; set; }
     public Queue<char> buttonSequence { get; set; }
 
-    private static string letters = "ZEQ";
+    private static string letters = "ZEQRCF";
     private static Dictionary<string, Texture2D> buttonTextures;
     private List<GameObject> buttonInstances = new List<GameObject>();
     private Collider2D collider;
@@ -91,7 +91,8 @@ public class Monster : Sounds, IMonster
         }
 
         timeForAttack = Time.time;
-        PlaySound(objectSounds[0]);
+        if (objectSounds.Length > 0)
+            PlaySound(objectSounds[0]);
         PlayerHealth.TakeDamage(1);
         
     }
@@ -119,7 +120,8 @@ public class Monster : Sounds, IMonster
                 buttonSequence.Dequeue();
                 if (buttonTextures.ContainsKey(currentButton.ToString() + "apply"))
                 {
-                    PlaySound(objectSounds[2], volume: 0.5f, fadeInTime: 0);
+                    if (objectSounds.Length > 0)
+                        PlaySound(objectSounds[2], volume: 0.5f, fadeInTime: 0);
                     Debug.Log("Загрузили текстурку");
                     var texture = buttonTextures[currentButton + "apply"];
                     var currentSprite = buttonInstances[buttonInstances.Count - buttonSequence.Count - 1];
@@ -145,7 +147,8 @@ public class Monster : Sounds, IMonster
                     
                 buttonInstances[buttonInstances.Count - buttonSequence.Count].GetComponent<SpriteRenderer>()
                     .sprite = newSprite;
-                PlaySound(objectSounds[0], volume: 0.5f, fadeInTime: 0);
+                if (objectSounds.Length > 0)
+                    PlaySound(objectSounds[0], volume: 0.5f, fadeInTime: 0);
                 PlayerHealth.TakeDamage(1);
             }
         }

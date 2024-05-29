@@ -50203,6 +50203,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7090300116503976811, guid: 7e9995972ddeccf44b21236e20dadc7c, type: 3}
+      propertyPath: arrow
+      value: 
+      objectReference: {fileID: 1937105160363726221, guid: 79f3430187a0b224481c221a3c11cc79, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -50260,6 +50264,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zombie
       objectReference: {fileID: 0}
+    - target: {fileID: 3547089592783480959, guid: 9b0ca608216545e41af1f70826dc682f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8735103280827965622, guid: 9b0ca608216545e41af1f70826dc682f, type: 3}
       propertyPath: PlayerHealth
       value: 
@@ -50281,6 +50289,10 @@ PrefabInstance:
       propertyPath: PlayerHealth
       value: 
       objectReference: {fileID: 642345989}
+    - target: {fileID: 719772940660551182, guid: 1950411262fe4984a849dbdcec0136b4, type: 3}
+      propertyPath: VisibleRadius
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3455477172165626742, guid: 1950411262fe4984a849dbdcec0136b4, type: 3}
       propertyPath: m_Name
       value: Zombie (1)

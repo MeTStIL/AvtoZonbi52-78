@@ -10,7 +10,10 @@ namespace Fighting
         {
             { 'E', KeyCode.E },
             { 'Q', KeyCode.Q },
-            { 'Z', KeyCode.Z }
+            { 'Z', KeyCode.Z },
+            { 'C', KeyCode.C },
+            { 'F', KeyCode.F },
+            { 'R', KeyCode.R },
         };
 
         public static Dictionary<char, KeyCode> buttonsEducation = new()
