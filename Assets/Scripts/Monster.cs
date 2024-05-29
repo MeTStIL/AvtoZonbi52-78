@@ -166,6 +166,7 @@ public class Monster : Sounds, IMonster
     }
     public virtual void LateUpdate()
     {
+        
         if (LivesCount == 0)
         {
             isDead = true;

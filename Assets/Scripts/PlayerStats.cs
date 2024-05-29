@@ -5,4 +5,5 @@ using UnityEngine;
 public static class PlayerStats
 {
     public static int kills;
+    public static int currentLevelIndex;
 }

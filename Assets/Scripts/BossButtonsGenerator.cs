@@ -149,7 +149,7 @@ public class Boss_buttons_generator : Sounds
         var texture = Fighting.LettersTo2DTextures.LoadTextureFromPath($"Assets/PlayerHealthBar/{playerHealth}.png");
         playerHealthBar.texture = texture;
         if (playerHealth == 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Death.MoveToScreenDeath();
         
     }
 
