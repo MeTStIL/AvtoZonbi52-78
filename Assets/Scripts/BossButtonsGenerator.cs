@@ -13,6 +13,7 @@ public class Boss_buttons_generator : Sounds
 {
     [SerializeField] private RawImage bossHealthBar;
     [SerializeField] private RawImage playerHealthBar;
+    [SerializeField] private string BossType;
     private int bossHeath;
     private int playerHealth;
     public GameObject buttonPrefab;
@@ -114,7 +115,7 @@ public class Boss_buttons_generator : Sounds
         
         bossHeath -= 1;
         Debug.Log("ЖИЗНЬ БОССА " + bossHeath);
-        var texture = Fighting.LettersTo2DTextures.LoadTextureFromPath($"Assets/BossHealthBar/{bossHeath}.png");
+        var texture = Fighting.LettersTo2DTextures.LoadTextureFromPath($"Assets/{BossType}HealthBar/{bossHeath}.png");
         bossHealthBar.texture = texture;
         if (bossHeath == 4 && isSecondWave == false)
             MakeSecondWave();
