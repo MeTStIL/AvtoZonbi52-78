@@ -774,8 +774,8 @@ MonoBehaviour:
   skipButton: {fileID: 1661769984}
   skipText: {fileID: 2132552267}
   delay: 0.1
-  messagesPath: Assets/StartCutScene/texts.txt
-  imagesPath: Assets/StartCutScene/Images
+  messagesPath: Assets/FinalCutScene/texts.txt
+  imagesPath: Assets/FinalCutScene/Images
   image: {fileID: 1856728871}
 --- !u!82 &1958051633
 AudioSource:

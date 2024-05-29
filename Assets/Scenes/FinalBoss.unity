@@ -266,7 +266,7 @@ SpriteRenderer:
   m_SortingLayerID: 2057131515
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5e47d8696682aeb4c824d4d80ecf94bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 957e1d00a8fe7b0498055adc5590517f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -295,7 +295,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a5dd4c08750bbb845a0d4c159c737004, type: 3}
   bossHealthBar: {fileID: 1203443542}
   playerHealthBar: {fileID: 801303235}
-  BossType: Boss
+  BossType: FinalBoss
   buttonPrefab: {fileID: 0}
 --- !u!82 &76608008
 AudioSource:
@@ -680,7 +680,7 @@ SpriteRenderer:
   m_SortingLayerID: 2057131515
   m_SortingLayer: 1
   m_SortingOrder: 199
-  m_Sprite: {fileID: 21300000, guid: 97d01092bba08fe45b29c1cff04b20c0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63dad2c5a11b0ab42a7f989a5f3a8988, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -700,8 +700,8 @@ Transform:
   m_GameObject: {fileID: 1030391507}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.34, y: -0.47, z: 0}
-  m_LocalScale: {x: 0.87242293, y: 0.880964, z: 0.73}
+  m_LocalPosition: {x: 0.04, y: -0.22, z: 0}
+  m_LocalScale: {x: 1.8404537, y: 1.8584718, z: 1.54}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -741,8 +741,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 998, y: 853}
-  m_SizeDelta: {x: 2005, y: 111}
+  m_AnchoredPosition: {x: 982.04, y: 853}
+  m_SizeDelta: {x: 1973.08, y: 111}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1203443542
 MonoBehaviour:
@@ -764,7 +764,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 2ab4c17b431a4e448868f5ea508c5f71, type: 3}
+  m_Texture: {fileID: 2800000, guid: 8e721cbd9511f7d4d876d70cd25e3f37, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

@@ -14,9 +14,9 @@ public class TypingText : Sounds
     [SerializeField] private GameObject skipText;
     public float delay = 0.1f;
     private readonly float visabilityCoef = 0.1f;
-    private string messagesPath;
+    [SerializeField]private string messagesPath;
     private List<string> messages;
-    private string imagesPath;
+    [SerializeField]private string imagesPath;
     private Dictionary<int, Texture2D> images;
     [SerializeField] private Image image;
     private Text textComp;
@@ -24,8 +24,6 @@ public class TypingText : Sounds
     private int currentIndex;
     void Start()
     {
-        imagesPath = "Assets/StartCutScene/Images";
-        messagesPath = "Assets/StartCutScene/texts.txt";
         messages = ImageMessageConvertion.GetTexts(messagesPath);
         images = ImageMessageConvertion.GetImages(imagesPath);
         isActive = false;
@@ -77,7 +75,7 @@ public class TypingText : Sounds
     {
         EnableExitButton();
         MoveToNextScene();
-        if (!isActive && currentIndex < 4)
+        if (!isActive && currentIndex < messages.Count)
             StartCoroutine(ShowText(currentIndex));
         if (Input.GetKeyDown(KeyCode.Q))
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
@@ -98,7 +96,7 @@ public class TypingText : Sounds
     private void MoveToNextScene()
     {
         
-        if (currentIndex != 4) return;
+        if (currentIndex != messages.Count) return;
         StartCoroutine(Delay(2));
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
