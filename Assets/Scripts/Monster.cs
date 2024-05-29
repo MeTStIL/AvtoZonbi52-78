@@ -285,7 +285,7 @@ public class Monster : Sounds, IMonster
         isDead = true;
         Destroy(gameObject, 0.3f);
         PlayerStats.kills += 1;
-        AudioSource.PlayClipAtPoint(objectSounds[1], transform.position, 0.8f);
+        AudioSource.PlayClipAtPoint(objectSounds[1], transform.position, 1f);
     }
 
     public virtual void GetDamage()
