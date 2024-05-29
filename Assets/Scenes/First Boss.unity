@@ -295,6 +295,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a5dd4c08750bbb845a0d4c159c737004, type: 3}
   bossHealthBar: {fileID: 1203443542}
   playerHealthBar: {fileID: 801303235}
+  BossType: Boss
   buttonPrefab: {fileID: 0}
 --- !u!82 &76608008
 AudioSource:
