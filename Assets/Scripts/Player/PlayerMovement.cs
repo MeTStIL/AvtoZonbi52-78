@@ -11,6 +11,7 @@ namespace Player
         public GameObject arrow;
         public CheckpointManager checkpointManager; // Добавьте это поле в инспектор и прикрепите CheckpointManager к игроку
         private bool isMoving = false;
+        private bool isPaused = false;
 
         private void Awake()
         {
@@ -32,18 +33,25 @@ namespace Player
             {
                 arrow.SetActive(!arrow.activeSelf); // Переключаем видимость стрелки
             }
-            
-            if (direction.sqrMagnitude > 0 && !isMoving)
+            isPaused = PauseMenu.isPaused;
+            if (!isPaused) // Only control the steps if the game is not paused
             {
-                isMoving = true;
-                PlaySound(objectSounds[0], volume: 0.8f);
+                ResumeMusic();
+                if (direction.sqrMagnitude > 0 && !isMoving)
+                {
+                    isMoving = true;
+                    PlaySound(objectSounds[0], volume: 0.8f);
+                }
+                else if (direction.sqrMagnitude == 0 && isMoving)
+                {
+                    isMoving = false;
+                    StopSound();
+                }
             }
-            else if (direction.sqrMagnitude == 0 && isMoving)
+            else
             {
-                isMoving = false;
-                StopSound(objectSounds[0]);
+                PauseMusic();
             }
-            
         }
 
         private void FixedUpdate()

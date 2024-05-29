@@ -15,9 +15,19 @@ public class Sounds : MonoBehaviour
             StartCoroutine(FadeIn(fadeInTime, volume));
     }
 
-    public void StopSound(AudioClip clip)
+    public void StopSound()
     {
         audioSource.Stop();
+    }
+    
+    public void PauseMusic()
+    {
+        audioSource.Pause();
+    }
+
+    public void ResumeMusic()
+    {
+        audioSource.UnPause();
     }
 
 
