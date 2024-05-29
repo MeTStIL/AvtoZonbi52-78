@@ -122,7 +122,7 @@ public class Boss_buttons_generator : Sounds
         if (bossHeath == 1 && isLastWave == false)
             MakeLastWave();
         if (bossHeath == 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
     }
 
