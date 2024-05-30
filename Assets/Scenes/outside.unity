@@ -4566,6 +4566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   other: {fileID: 0}
+  chaseRadius: 0
 --- !u!114 &261249365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6652,6 +6653,47 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &515086884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515086868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc46af9df9a42dfa6d164cb9e4b72ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  other: {fileID: 0}
+  chaseRadius: 0
+--- !u!114 &515086885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515086868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef25d2a46404295abf800967a31d270, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  other: {fileID: 0}
+  isButtonGenerated: 0
+--- !u!114 &515086886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515086868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce8bd1cffc846e289439de90ec5d8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  other: {fileID: 0}
 --- !u!1 &566413061
 GameObject:
   m_ObjectHideFlags: 0
@@ -90226,6 +90268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   other: {fileID: 0}
+  chaseRadius: 0
 --- !u!114 &1471511708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91497,6 +91540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   other: {fileID: 0}
+  chaseRadius: 0
 --- !u!114 &1579009993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94239,6 +94283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   other: {fileID: 0}
+  chaseRadius: 0
 --- !u!114 &1937717629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94696,6 +94741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   other: {fileID: 0}
+  chaseRadius: 0
 --- !u!114 &1968132540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94837,6 +94883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   other: {fileID: 0}
+  chaseRadius: 0
 --- !u!114 &1989248733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102117,6 +102164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   other: {fileID: 0}
+  chaseRadius: 0
 --- !u!114 &2138176145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102324,7 +102372,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 719665741}
     - target: {fileID: 3297953230781724232, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
+      propertyPath: playerHealth
+      value: 
+      objectReference: {fileID: 719665741}
+    - target: {fileID: 3297953230781724232, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
       propertyPath: VisibleRadius
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3297953230781724232, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
+      propertyPath: visibleRadius
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3297953230781724232, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
@@ -102396,13 +102452,13 @@ PrefabInstance:
       addedObject: {fileID: 515086876}
     - targetCorrespondingSourceObject: {fileID: 2497360891977855847, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 515086886}
+    - targetCorrespondingSourceObject: {fileID: 2497360891977855847, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 515086885}
+    - targetCorrespondingSourceObject: {fileID: 2497360891977855847, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 515086884}
-    - targetCorrespondingSourceObject: {fileID: 2497360891977855847, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 515086892}
-    - targetCorrespondingSourceObject: {fileID: 2497360891977855847, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 515086893}
   m_SourcePrefab: {fileID: 100100000, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
 --- !u!1001 &2643661361503720460
 PrefabInstance:
@@ -103069,19 +103125,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 517a0709be0a4ec4d9483a8c18c10678, type: 3}
   - {fileID: 8300000, guid: 81f7dda7b74a63045a64a2994929984c, type: 3}
   - {fileID: 8300000, guid: 3e7ad43aea84c4649a447116651fcc0a, type: 3}
-  WalkingRadius: 0
-  VisibleRadius: 3
-  IsStatic: 0
-  PlayerHealth: {fileID: 719665741}
+  walkingRadius: 0
+  visibleRadius: 3
+  isStatic: 0
+  playerHealth: {fileID: 719665741}
   buttonPrefab: {fileID: 0}
   sprite: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   isHarassment: 0
-  speedAttack: 0
-  currentSpeed: 0
   freezeTime: 2
   player: {fileID: 0}
-  chaseRadius: 0
 --- !u!82 &8521374204743008510
 AudioSource:
   m_ObjectHideFlags: 0
@@ -103191,6 +103244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   other: {fileID: 0}
+  chaseRadius: 0
 --- !u!114 &8521374204743008524
 MonoBehaviour:
   m_ObjectHideFlags: 0
