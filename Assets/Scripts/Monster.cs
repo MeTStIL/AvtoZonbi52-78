@@ -141,8 +141,7 @@ public class Monster : Sounds, IMonster
              else
                  PlaySound(objectSounds[0], volume: 0.5f, fadeInTime: 0);
     }
-
-    #region Buttons
+    
 
     public void GenerateButtonSequence()
     {
@@ -160,9 +159,7 @@ public class Monster : Sounds, IMonster
         isButtonGenerated = true;
         
     }
-
-     
-    #endregion
+    
     
     #region Преследование
     private Transform player;

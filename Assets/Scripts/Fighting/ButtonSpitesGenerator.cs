@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +10,8 @@ namespace Fighting
         {
             var buttonGenerator = new ButtonSequenceGen();
             var buttonPrefab = Resources.Load<GameObject>("button");
-            var koef = 0.3f;
             var buttons = buttonGenerator.GenerateButtonSeq(count);
-            var buttonPosition = parent.transform.position + new Vector3((-count)*koef, 1, 0);
+            var buttonPosition = parent.transform.position + new Vector3((-count)*0.3f, 1, 0);
         
             foreach (var letter in buttons)
             {

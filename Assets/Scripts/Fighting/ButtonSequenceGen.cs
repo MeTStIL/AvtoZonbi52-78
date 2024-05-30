@@ -50,34 +50,30 @@ namespace Fighting
 
         public void GenerateSprites(ButtonInfo buttonInfo, int count, Queue<char> sequence, List<GameObject> instances)
         {
-            var koef = 0.3f;
             var buttons = GenerateButtonSeq(count);
-            var buttonPosition = buttonInfo.parent.transform.position + new Vector3((-count)*koef, 1, 0);
+            var buttonPosition = buttonInfo.Parent.transform.position + new Vector3((-count)*0.3f, 1, 0);
             foreach (var letter in buttons)
             {
                 sequence.Enqueue(letter);
-                buttonInfo.button.transform.localScale = new Vector3(2, 2, 2);
-                buttonInfo.buttonSpriteRenderer.sortingOrder = 10;
-                buttonInfo.buttonSpriteRenderer.sprite = 
-                    Sprite.Create(buttonInfo.texture, new Rect(0, 0, buttonInfo.texture.width, 
-                        buttonInfo.texture.height), Vector2.zero);
+                buttonInfo.Button.transform.localScale = new Vector3(2, 2, 2);
+                buttonInfo.ButtonSpriteRenderer.sortingOrder = 10;
+                buttonInfo.ButtonSpriteRenderer.sprite = 
+                    Sprite.Create(buttonInfo.Texture, new Rect(0, 0, buttonInfo.Texture.width, 
+                        buttonInfo.Texture.height), Vector2.zero);
                 buttonPosition += new Vector3(1*0.8f, 0, 0);
-                instances.Add(buttonInfo.button);
+                instances.Add(buttonInfo.Button);
             }
         }
 
         public void GenerateSprite(ButtonInfo buttonInfo, Queue<char> sequence, List<GameObject> instances, int count, Vector3 position)
         {
-            var koef = 0.3f;
-            
-            sequence.Enqueue(buttonInfo.letter);
-            buttonInfo.button.transform.localScale = new Vector3(2, 2, 2);
-            buttonInfo.buttonSpriteRenderer.sortingOrder = 10;
-            buttonInfo.buttonSpriteRenderer.sprite = 
-                Sprite.Create(buttonInfo.texture, new Rect(0, 0, buttonInfo.texture.width, 
-                    buttonInfo.texture.height), Vector2.zero);
-            
-            instances.Add(buttonInfo.button);
+            sequence.Enqueue(buttonInfo.Letter);
+            buttonInfo.Button.transform.localScale = new Vector3(2, 2, 2);
+            buttonInfo.ButtonSpriteRenderer.sortingOrder = 10;
+            buttonInfo.ButtonSpriteRenderer.sprite = 
+                Sprite.Create(buttonInfo.Texture, new Rect(0, 0, buttonInfo.Texture.width, 
+                    buttonInfo.Texture.height), Vector2.zero);
+            instances.Add(buttonInfo.Button);
         }
     
     
