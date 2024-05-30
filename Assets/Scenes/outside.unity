@@ -86165,6 +86165,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -2064970247
       objectReference: {fileID: 0}
+    - target: {fileID: 6539245240059354163, guid: 1950411262fe4984a849dbdcec0136b4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bada026fff01178498f2b67625431eae, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -91979,6 +91983,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 1691214396, guid: 52721724f9068514bb44ac2e4420498d, type: 3}
+    - target: {fileID: 2804625269078366627, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bada026fff01178498f2b67625431eae, type: 2}
     - target: {fileID: 3297953230781724232, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
       propertyPath: PlayerHealth
       value: 
@@ -101936,6 +101944,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mushroom purple
       objectReference: {fileID: 0}
+    - target: {fileID: 5716719080874358649, guid: 036d181bf861cf543a267bbef7dea17e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bada026fff01178498f2b67625431eae, type: 2}
     - target: {fileID: 8617846126450492627, guid: 036d181bf861cf543a267bbef7dea17e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.47
@@ -101996,6 +102008,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlimeSword_ice
       objectReference: {fileID: 0}
+    - target: {fileID: 2804625269078366627, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bada026fff01178498f2b67625431eae, type: 2}
     - target: {fileID: 3297953230781724232, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
       propertyPath: PlayerHealth
       value: 
@@ -102152,6 +102168,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8045851772190342551, guid: ff8448887e25413499320d0b90ba41ef, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bada026fff01178498f2b67625431eae, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -102213,6 +102233,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1819743474136526755, guid: 171ef7fba679c2f4c9e4d5f75424cebc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bada026fff01178498f2b67625431eae, type: 2}
     - target: {fileID: 6212839242158721140, guid: 171ef7fba679c2f4c9e4d5f75424cebc, type: 3}
       propertyPath: PlayerHealth
       value: 
@@ -102265,6 +102289,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 419773597494967660, guid: 16421008fdd056145a72536e31115fb4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bada026fff01178498f2b67625431eae, type: 2}
     - target: {fileID: 3713741776992045122, guid: 16421008fdd056145a72536e31115fb4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.88
@@ -102353,6 +102381,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 95628363204983628, guid: 1152fe2935ed56d4f96b7e6b84cb2ddd, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bada026fff01178498f2b67625431eae, type: 2}
     - target: {fileID: 3376413212826789660, guid: 1152fe2935ed56d4f96b7e6b84cb2ddd, type: 3}
       propertyPath: m_Name
       value: Scorpion Red
@@ -102493,6 +102525,10 @@ PrefabInstance:
       propertyPath: PlayerHealth
       value: 
       objectReference: {fileID: 719665741}
+    - target: {fileID: 8547013045274108730, guid: 85efa1d93b6b3c24ab1376a560a8c9ce, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bada026fff01178498f2b67625431eae, type: 2}
     m_RemovedComponents:
     - {fileID: 8211400763355776401, guid: 85efa1d93b6b3c24ab1376a560a8c9ce, type: 3}
     m_RemovedGameObjects: []
