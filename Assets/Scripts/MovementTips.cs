@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Fighting;
 using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
@@ -20,7 +21,7 @@ public class MovementTips : Sounds
         {
             for (var i = 0; i < buttons.Length; i++)
             {
-                if (Input.GetKeyDown(Fighting.ButtonSequenceGen.buttonsEducation[buttonsChar[i]]))
+                if (Input.GetKeyDown(ButtonsGenerationInfo.p_ButtonsEducation[buttonsChar[i]]))
                     MakeButtonCorrect(buttons[i], buttonsChar[i]);
             }
         }

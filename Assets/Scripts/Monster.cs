@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Fighting;
 using Player;
 using Player.Health;
 using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public interface IMonster
@@ -62,11 +64,13 @@ public class Monster : Sounds, IMonster
     public float timeForAttack;
     private bool isDead;
     private bool isSound;
+    private ButtonSequenceGen buttonGenerator;
 
     public virtual void Awake()
     {
         //START SETTINGS
         isDead = false;
+        buttonGenerator = new ButtonSequenceGen();
         sprite = GetComponent<SpriteRenderer>();
         buttonSequence = new Queue<char>();
         isButtonGenerated = false;
@@ -107,53 +111,7 @@ public class Monster : Sounds, IMonster
             DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
         }
     }
-
-    private void CheckForCorrectClick()
-    {
-        if (isButtonGenerated == true && buttonSequence.Count > 0)
-        {
-            
-            var currentButton = Fighting.ButtonSequenceGen.buttons[buttonSequence.First()];
-            if (Input.GetKeyDown(currentButton))
-            {
-                Debug.Log("Нажали");
-                buttonSequence.Dequeue();
-                if (buttonTextures.ContainsKey(currentButton.ToString() + "apply"))
-                {
-                    if (objectSounds.Length > 0)
-                        PlaySound(objectSounds[2], volume: 0.5f, fadeInTime: 0);
-                    Debug.Log("Загрузили текстурку");
-                    var texture = buttonTextures[currentButton + "apply"];
-                    var currentSprite = buttonInstances[buttonInstances.Count - buttonSequence.Count - 1];
-                    var position = currentSprite.transform.position;
-                    Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),Vector2.zero);
-                    
-                    buttonInstances[buttonInstances.Count - buttonSequence.Count - 1].GetComponent<SpriteRenderer>()
-                        .sprite = newSprite;
-                    
-                }
-                else
-                {
-                    Debug.Log("с текстурами прроблема");
-                }
-            }
-            else if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
-            {
-                Debug.Log("Загрузили текстурку");
-                var texture = buttonTextures[currentButton + "cancel"];
-                var currentSprite = buttonInstances[buttonInstances.Count - buttonSequence.Count];
-                var position = currentSprite.transform.position;
-                Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),Vector2.zero);
-                    
-                buttonInstances[buttonInstances.Count - buttonSequence.Count].GetComponent<SpriteRenderer>()
-                    .sprite = newSprite;
-                if (objectSounds.Length > 0)
-                    PlaySound(objectSounds[0], volume: 0.5f, fadeInTime: 0);
-                PlayerHealth.TakeDamage(1);
-            }
-        }
-    }
-
+    
     private void CheckForAttack()
     {
         if (isButtonGenerated)
@@ -176,7 +134,12 @@ public class Monster : Sounds, IMonster
             StartCoroutine(StopAndSetNewTarget());
         Walking();
         CheckForAttack();
-        CheckForCorrectClick();
+        var isClickCorrect = buttonGenerator.CheckForCorrectClick(buttonSequence, buttonInstances);
+         if (isClickCorrect != null)
+             if (isClickCorrect == true)
+                 PlaySound(objectSounds[2], volume: 0.5f, fadeInTime: 0);
+             else
+                 PlaySound(objectSounds[0], volume: 0.5f, fadeInTime: 0);
     }
 
     #region Buttons
@@ -184,26 +147,16 @@ public class Monster : Sounds, IMonster
     public void GenerateButtonSequence()
     {
         var koef = 0.3f;
-        var buttons = Fighting.ButtonSequenceGen.GenerateButtonSeq(letters, ButtonCount);
+        var buttons = buttonGenerator.GenerateButtonSeq(ButtonCount);
         Vector3 buttonPosition = sprite.transform.position + new Vector3((-ButtonCount)*koef, 1, 0);
         
         foreach (var letter in buttons)
         {
-            buttonSequence.Enqueue(letter);
-            var texture = buttonTextures[letter.ToString()];
-            // Создаем экземпляр кнопки из префаба
-            GameObject newButton = Instantiate(buttonPrefab, buttonPosition, Quaternion.identity, transform);
-            SpriteRenderer buttonSpriteRenderer = newButton.GetComponent<SpriteRenderer>();
-            newButton.transform.localScale = new Vector3(2, 2, 2);
-            buttonSpriteRenderer.sortingOrder = 10;
-                // Устанавливаем текстуру для кнопки
-            buttonSpriteRenderer.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
-            // Смещаем позицию для следующей кнопки
-            buttonPosition += new Vector3(1*0.8f, 0, 0); // Примерное смещение, в зависимости от вашего дизайна
-            // Добавляем кнопку в список
-            buttonInstances.Add(newButton);
+            var newButton = Instantiate(buttonPrefab, buttonPosition, Quaternion.identity, transform);
+            var buttonInfo = new ButtonInfo(newButton, letter, sprite);
+            buttonGenerator.GenerateSprite(buttonInfo, buttonSequence, buttonInstances, ButtonCount, buttonPosition);
+            buttonPosition += new Vector3(1*0.8f, 0, 0);
         }
-
         isButtonGenerated = true;
         
     }
