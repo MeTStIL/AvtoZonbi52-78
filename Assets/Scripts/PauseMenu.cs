@@ -14,45 +14,33 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(false);
         continueButton.onClick.AddListener(Continue);
-        quitButton.onClick.AddListener(Quit);
+        quitButton.onClick.AddListener(LoadMainMenu);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
-        }
+        if (!Input.GetKeyDown(KeyCode.Escape)) return;
+        if (isPaused)
+            Continue();
+        else
+            Pause();
     }
 
-    public void Pause()
+    private void Pause()
     {
         isPaused = true;
         Time.timeScale = 0f;
         pauseMenuUI.SetActive(true);
     }
 
-    public void Resume()
+    private void Continue()
     {
-        Debug.Log("НаАЖАЛИ");
         isPaused = false;
         Time.timeScale = 1f;
         pauseMenuUI.SetActive(false);
     }
 
-    public void Continue()
-    {
-        Resume();
-    }
-
-    public void Quit()
+    private void LoadMainMenu()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(1);

@@ -6,6 +6,7 @@ public class Sounds : MonoBehaviour
 {
     public AudioClip[] objectSounds;
     private AudioSource audioSource => GetComponent<AudioSource>();
+    private bool isPAused = false;
 
     public void PlaySound(AudioClip clip, float volume = 1f, float p1 = 0.85f, float p2 = 1.2f, float fadeInTime = 1f)
     {

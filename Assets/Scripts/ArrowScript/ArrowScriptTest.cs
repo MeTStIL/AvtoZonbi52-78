@@ -3,19 +3,14 @@ using Player;
 
 public class RotateWithPlayer : MonoBehaviour
 {
-    public PlayerMovement playerMovement; // Добавьте это поле в инспектор и прикрепите PlayerMovement к стрелке
+    public PlayerMovement playerMovement;
 
-    void Update()
+    private void Update()
     {
-        Transform target = playerMovement.checkpointManager.GetCurrentTarget();
-        if (target != null)
-        {
-            // Вычисляем угол поворота игрока
-            Vector3 direction = target.position - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-            // Поворачиваем объект
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
+        var target = playerMovement.checkpointManager.GetCurrentTarget();
+        if (target == null) return;
+        var direction = target.position - transform.position;
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }
