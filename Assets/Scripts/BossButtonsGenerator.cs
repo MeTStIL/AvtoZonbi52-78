@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Fighting;
 using Unity.VisualScripting;
 using UnityEditor.UI;
 using UnityEngine;
@@ -18,7 +19,7 @@ public class Boss_buttons_generator : Sounds
     private int playerHealth;
     public GameObject buttonPrefab;
     private static Dictionary<string, Texture2D> buttonTextures;
-    private static string letters = "ZEQ";
+    private static string letters = "EQZCFR";
     private int buttonsLimit = 10;
     private HashSet<(float, float)> buttonsCoord;
     private SpriteRenderer sprite;
@@ -34,9 +35,11 @@ public class Boss_buttons_generator : Sounds
     private bool isDelay;
     private int buttonsToDamage;
     private bool isPaused = false;
+    private ButtonSequenceGen buttonGenerator;
         
     private void Awake()
     {
+        buttonGenerator = new ButtonSequenceGen();
         buttonsToDamage = 10;
         isDelay = false;
         buttonsGenTimeDelay = 0.5f;
@@ -202,7 +205,7 @@ public class Boss_buttons_generator : Sounds
         Debug.Log(buttons.Count - deletedButtons.Count);
         var koef = 0.3f;
         var buttonSize = 5f;
-        var button = Fighting.ButtonSequenceGen.GenerateButton(letters);
+        var button = buttonGenerator.GenerateButton();
         var random = new Random();
         Vector3 buttonPosition =sprite.transform.position + new Vector3(random.Next(-5, 5), random.Next(-2, 4), 0);
         if (!IsCollidesWithButtons(buttonPosition, buttonSize))
@@ -217,7 +220,7 @@ public class Boss_buttons_generator : Sounds
             // Устанавливаем текстуру для кнопки
             buttonSpriteRenderer.sprite =
                 Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
-            buttons[newButton] = Fighting.ButtonSequenceGen.buttons[button];
+            buttons[newButton] = ButtonsGenerationInfo.p_Buttons[button];
         }
     }
 
