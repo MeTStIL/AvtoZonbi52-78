@@ -9,7 +9,6 @@ public class SmallMonster : Monster
         base.Awake();
         LivesCount = 1;
         StandardSpeed = 2;
-        
         speedAttack = 5;
         ButtonCount = 2;
         currentSpeed = StandardSpeed;
