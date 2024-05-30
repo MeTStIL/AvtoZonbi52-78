@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class MediumMonster : Monster
@@ -7,10 +8,13 @@ public class MediumMonster : Monster
     public override void Awake()
     {
         base.Awake();
-        LivesCount = 2;
-        StandardSpeed = 2;
-        speedAttack = 4;
+        MonsterInfo = new MonsterInfo()
+        {
+            LivesCount = 2,
+            StandardSpeed = 2,
+            SpeedAttack = 4,
+            CurrentSpeed = 2
+        };
         ButtonCount = 3;
-        currentSpeed = StandardSpeed;
     }
 }

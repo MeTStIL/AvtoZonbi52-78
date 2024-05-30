@@ -24,7 +24,7 @@ public class FightingMechanic : MonsterTypeIdentifier
         CheckPlayerMissClick();
         other.IsCorrectClick = buttonGenerator.CheckForCorrectClick(buttonSequence, buttonInstances);
         if (!(Vector3.Distance(transform.position, other.player.position) <= other.visibleRadius)
-            || isButtonGenerated || other.LivesCount <= 0) return;
+            || isButtonGenerated || other.MonsterInfo.LivesCount <= 0) return;
         GenerateButtonSequence();
         timeForAttack = Time.time;
     }
@@ -79,7 +79,7 @@ public class FightingMechanic : MonsterTypeIdentifier
     private void GiveDamageToMonster()
     {
         isButtonGenerated = false;
-        other.LivesCount--;
+        other.MonsterInfo.LivesCount--;
         buttonInstances = new List<GameObject>();
         DestroyButtons();
     }

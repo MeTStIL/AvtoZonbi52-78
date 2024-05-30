@@ -20,7 +20,7 @@ public class Harassment : MonsterTypeIdentifier
     {
         if (other.isStatic) return;
         if (Vector3.Distance(transform.position, other.player.position) <= other.visibleRadius / 2)
-            other.currentSpeed = 0;
+            other.MonsterInfo.CurrentSpeed = 0;
         else if (Vector3.Distance(transform.position, other.player.position) <= other.visibleRadius)
             StartHarassment();
         else if (Vector3.Distance(transform.position, other.player.position) > chaseRadius)
@@ -30,14 +30,14 @@ public class Harassment : MonsterTypeIdentifier
     private void StartHarassment()
     {
         other.isHarassment = true;
-        other.currentSpeed = other.speedAttack;
+        other.MonsterInfo.CurrentSpeed = other.MonsterInfo.SpeedAttack;
         other.targetPosition = other.player.position;
     }
 
     private void StopHarassment()
     {
         other.isHarassment = false;
-        other.currentSpeed = other.StandardSpeed;
+        other.MonsterInfo.CurrentSpeed = other.MonsterInfo.StandardSpeed;
         other.SetNewTargetPosition();
     }
 }

@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using UnityEngine;
 
 public class HardMonster : Monster
@@ -5,10 +6,14 @@ public class HardMonster : Monster
     public override void Awake()
     {
         base.Awake();
-        LivesCount = 3;
-        StandardSpeed = 2;
-        speedAttack = 3;
+        MonsterInfo = new MonsterInfo()
+        {
+            LivesCount = 3,
+            StandardSpeed = 2,
+            SpeedAttack = 3,
+            CurrentSpeed = 2
+        };
         ButtonCount = 4;
-        currentSpeed = StandardSpeed;
+        
     }
 }

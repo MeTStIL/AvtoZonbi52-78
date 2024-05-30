@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Fighting
 {
-    
     public static class LettersTo2DTextures
     {
         public static Dictionary<string, Texture2D> ConnectCharWithTexture(string sequence)
@@ -34,6 +33,5 @@ namespace Fighting
             texture.LoadImage(fileData);
             return texture;
         }
-            
     }
 }
