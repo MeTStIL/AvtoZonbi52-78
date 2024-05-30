@@ -41,6 +41,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
+        Debug.Log("НаАЖАЛИ");
         isPaused = false;
         Time.timeScale = 1f;
         pauseMenuUI.SetActive(false);

@@ -33,6 +33,7 @@ public class Boss_buttons_generator : Sounds
     private float buttonsGenTimeDelay;
     private bool isDelay;
     private int buttonsToDamage;
+    private bool isPaused = false;
         
     private void Awake()
     {
@@ -144,6 +145,7 @@ public class Boss_buttons_generator : Sounds
     
     private void DamagePlayer()
     {
+        PlaySound(objectSounds[3]);
         playerHealth -= 1;
         Debug.Log("ЖИЗНЬ БОССА " + playerHealth);
         var texture = Fighting.LettersTo2DTextures.LoadTextureFromPath($"Assets/PlayerHealthBar/{playerHealth}.png");
@@ -183,11 +185,15 @@ public class Boss_buttons_generator : Sounds
     {
         foreach (var button in buttons.Keys.Where((k, v) => !deletedButtons.Contains(k)))
         {
-            button.transform.localScale -= buttonDecreaseKoef;
-            var buttonSprite = button.GetComponent<SpriteRenderer>();
-            var color = buttonSprite.color;
-            color.a -= buttonVisibilityKoef;
-            buttonSprite.color = color;
+            isPaused = PauseMenu.isPaused;
+            if (!isPaused)
+            {
+                button.transform.localScale -= buttonDecreaseKoef;
+                var buttonSprite = button.GetComponent<SpriteRenderer>();
+                var color = buttonSprite.color;
+                color.a -= buttonVisibilityKoef;
+                buttonSprite.color = color;
+            }
         }
     }
     
