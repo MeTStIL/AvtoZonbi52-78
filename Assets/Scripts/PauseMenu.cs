@@ -1,4 +1,5 @@
 using Player;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,6 +20,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log($"{continueButton.transform.position}  {Input.mousePosition}");
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
         if (isPaused)
             Continue();
