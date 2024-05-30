@@ -19,11 +19,7 @@ namespace Player.Health
             currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
 
             if (currentHealth == 0)
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-
-        private void Update()
-        {
+                Death.MoveToScreenDeath();
         }
     }
 }
