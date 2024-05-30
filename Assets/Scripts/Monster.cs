@@ -15,13 +15,10 @@ public interface IMonster
 {
     int LivesCount { get; set; }
     float StandardSpeed { get; set; }
-    //float WalkingRadius { get; set; }
-    //float VisibleRadius { get; set; }
     Vector3 SpritePosition { get; set; }
     public int ButtonCount { get; set; }
     bool isButtonGenerated { get; set; }
     Queue<char> buttonSequence { get; set; }
-
     void Awake();
     void LateUpdate();
     void Die();
@@ -35,7 +32,6 @@ public interface IMonster
 
 public class Monster : Sounds, IMonster
 {
-    
     public int LivesCount { get; set; }
     public float StandardSpeed { get; set; }
     [SerializeField] private float WalkingRadius;
@@ -45,17 +41,14 @@ public class Monster : Sounds, IMonster
     public Vector3 SpritePosition { get; set; }
     public bool isButtonGenerated { get; set; }
     public Queue<char> buttonSequence { get; set; }
-
-    private static string letters = "ZEQRCF";
-    private static Dictionary<string, Texture2D> buttonTextures;
+    
     private List<GameObject> buttonInstances = new List<GameObject>();
-    private Collider2D collider;
+   
     public GameObject buttonPrefab;
     private SpriteRenderer sprite;
     private Vector3 targetPosition;
     private bool isStopped = false;
     public bool isHarassment = false;
-    public LayerMask obstacleLayer;
     private Rigidbody2D rb;
     public float speedAttack;
     public float currentSpeed;
@@ -68,20 +61,15 @@ public class Monster : Sounds, IMonster
 
     public virtual void Awake()
     {
-        //START SETTINGS
         isDead = false;
         buttonGenerator = new ButtonSequenceGen();
         sprite = GetComponent<SpriteRenderer>();
         buttonSequence = new Queue<char>();
         isButtonGenerated = false;
-        collider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         SpritePosition = sprite.transform.position;
         SetNewTargetPosition();
         buttonPrefab = Resources.Load<GameObject>("button");
-        if (buttonPrefab == null)
-            Debug.LogError("Не удалось загрузить префаб кнопки!");
-        buttonTextures = Fighting.LettersTo2DTextures.ConnectCharWithTexture(letters);
     }
 
     private void CheckTimeToAttack()
@@ -142,12 +130,10 @@ public class Monster : Sounds, IMonster
                  PlaySound(objectSounds[0], volume: 0.5f, fadeInTime: 0);
     }
     
-
     public void GenerateButtonSequence()
     {
-        var koef = 0.3f;
         var buttons = buttonGenerator.GenerateButtonSeq(ButtonCount);
-        Vector3 buttonPosition = sprite.transform.position + new Vector3((-ButtonCount)*koef, 1, 0);
+        Vector3 buttonPosition = sprite.transform.position + new Vector3((-ButtonCount)*0.3f, 1, 0);
         
         foreach (var letter in buttons)
         {
@@ -174,10 +160,7 @@ public class Monster : Sounds, IMonster
     public void Update()
     {
         if (LivesCount == 0)
-        {
-            Debug.Log(PlayerStats.kills);
             Die();
-        }
 
         if (Vector3.Distance(transform.position, player.position) <= VisibleRadius 
             && isButtonGenerated == false && LivesCount > 0)
@@ -320,7 +303,7 @@ public class Monster : Sounds, IMonster
 
     IEnumerator StopSound()
     {
-        yield return new WaitForSeconds(objectSounds[3].length); // Wait for the sound to finish playing
+        yield return new WaitForSeconds(objectSounds[3].length);
         isSound = false;
     }
 

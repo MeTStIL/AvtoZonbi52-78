@@ -75,8 +75,5 @@ namespace Fighting
                     buttonInfo.Texture.height), Vector2.zero);
             instances.Add(buttonInfo.Button);
         }
-    
-    
-    
     }
 }
