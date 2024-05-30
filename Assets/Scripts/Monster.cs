@@ -26,7 +26,6 @@ public interface IMonster
     void Walking();
     IEnumerator StopAndSetNewTarget();
     void SetNewTargetPosition();
-    void StartHarassment();
     void GenerateButtonSequence();
 }
 
@@ -46,7 +45,7 @@ public class Monster : Sounds, IMonster
    
     public GameObject buttonPrefab;
     private SpriteRenderer sprite;
-    private Vector3 targetPosition;
+    public Vector3 targetPosition;
     private bool isStopped = false;
     public bool isHarassment = false;
     private Rigidbody2D rb;
@@ -56,12 +55,14 @@ public class Monster : Sounds, IMonster
     [SerializeField] public Health PlayerHealth;
     public float timeForAttack;
     private bool isDead;
-    private bool isSound;
     private ButtonSequenceGen buttonGenerator;
-
+    public bool? IsCorrectClick;
+    
+    
     public virtual void Awake()
     {
         isDead = false;
+        
         buttonGenerator = new ButtonSequenceGen();
         sprite = GetComponent<SpriteRenderer>();
         buttonSequence = new Queue<char>();
@@ -122,12 +123,8 @@ public class Monster : Sounds, IMonster
             StartCoroutine(StopAndSetNewTarget());
         Walking();
         CheckForAttack();
-        var isClickCorrect = buttonGenerator.CheckForCorrectClick(buttonSequence, buttonInstances);
-         if (isClickCorrect != null)
-             if (isClickCorrect == true)
-                 PlaySound(objectSounds[2], volume: 0.5f, fadeInTime: 0);
-             else
-                 PlaySound(objectSounds[0], volume: 0.5f, fadeInTime: 0);
+        
+         
     }
     
     public void GenerateButtonSequence()
@@ -148,8 +145,8 @@ public class Monster : Sounds, IMonster
     
     
     #region Преследование
-    private Transform player;
-    private float chaseRadius;
+    public Transform player;
+    public float chaseRadius;
     public void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -159,6 +156,7 @@ public class Monster : Sounds, IMonster
     
     public void Update()
     {
+        IsCorrectClick = buttonGenerator.CheckForCorrectClick(buttonSequence, buttonInstances);
         if (LivesCount == 0)
             Die();
 
@@ -168,42 +166,6 @@ public class Monster : Sounds, IMonster
             GenerateButtonSequence();
             timeForAttack = Time.time;
         }
-
-       
-        
-        // ПРЕСЛЕДОВАНИЕ
-        if (!IsStatic)
-        {
-            if (Vector3.Distance(transform.position, player.position) <= VisibleRadius / 2)
-            {
-                currentSpeed = 0;
-            }
-
-            else if (Vector3.Distance(transform.position, player.position) <= VisibleRadius)
-            {
-                isHarassment = true;
-                currentSpeed = speedAttack;
-                StartHarassment();
-            }
-            else if (Vector3.Distance(transform.position, player.position) > chaseRadius)
-            {
-                isHarassment = false;
-                currentSpeed = StandardSpeed;
-                StopHarassment();
-            }
-        }
-
-        CheckForDistance();
-    }
-
-    public void StartHarassment()
-    {
-        targetPosition = player.position;
-    }
-
-    public void StopHarassment()
-    {
-        SetNewTargetPosition();
     }
     
     #endregion
@@ -293,18 +255,6 @@ public class Monster : Sounds, IMonster
 
     #endregion
     
-    private void CheckForDistance()
-    {
-        if (!(Vector3.Distance(transform.position, player.position) <= 2f) || isSound) return;
-        isSound = true;
-        PlaySound(objectSounds[3]);
-        StartCoroutine(StopSound());
-    }
-
-    IEnumerator StopSound()
-    {
-        yield return new WaitForSeconds(objectSounds[3].length);
-        isSound = false;
-    }
+    
 
 }
