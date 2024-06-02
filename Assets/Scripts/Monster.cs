@@ -1,5 +1,4 @@
 using System.Collections;
-using DefaultNamespace;
 using Player.Health;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -59,7 +58,7 @@ public class Monster : Sounds, IMonster
             return;
         isDead = true;
         Destroy(gameObject, 0.3f);
-        PlayerStats.kills += 1;
+        PlayerStats.Kills += 1;
         AudioSource.PlayClipAtPoint(objectSounds[1], transform.position, 1f);
     }
     

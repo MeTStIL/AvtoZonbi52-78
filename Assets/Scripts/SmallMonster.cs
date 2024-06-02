@@ -1,4 +1,3 @@
-using DefaultNamespace;
 
 public class SmallMonster : Monster
 {
@@ -13,7 +12,5 @@ public class SmallMonster : Monster
             CurrentSpeed = 2
         };
         ButtonCount = 2;
-        
     }
-    
 }

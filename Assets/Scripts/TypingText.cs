@@ -13,7 +13,7 @@ public class TypingText : Sounds
     [SerializeField] private int nextSceneIndex;
     [SerializeField] private GameObject skipText;
     public float delay = 0.05f;
-    private readonly float visabilityCoef = 0.1f;
+    private const float VisibilityCoefficient = 0.1f;
     [SerializeField]private string messagesPath;
     private List<string> messages;
     [SerializeField]private string imagesPath;
@@ -22,7 +22,8 @@ public class TypingText : Sounds
     private Text textComp;
     private bool isActive;
     private int currentIndex;
-    void Start()
+
+    private void Start()
     {
         messages = ImageMessageConvertion.GetTexts(messagesPath);
         images = ImageMessageConvertion.GetImages(imagesPath);
@@ -30,13 +31,10 @@ public class TypingText : Sounds
         startTime = Time.deltaTime;
         textComp = GetComponent<Text>();
         textComp.text = "";
-        Debug.Log(messages.Count);
-        Debug.Log(images.Count);
-        Debug.Log(images[0]);
         currentIndex = 0;
     }
 
-    IEnumerator ShowText(int index)
+    private IEnumerator ShowText(int index)
     {
         textComp.text = "";
         SetImage(index);
@@ -50,9 +48,7 @@ public class TypingText : Sounds
                 PlaySound(objectSounds[0]);
             yield return new WaitForSeconds(delay);
         }
-
         StartCoroutine(Delay(2));
-        
     }
 
     private void SetImage(int index)
@@ -67,7 +63,7 @@ public class TypingText : Sounds
     private void IncreaseImageVisibility()
     {
         var color = image.color;
-        color.a += visabilityCoef;
+        color.a += VisibilityCoefficient;
         image.color = color;
     }
 
@@ -80,8 +76,8 @@ public class TypingText : Sounds
         if (Input.GetKeyDown(KeyCode.Q))
             SceneManager.LoadScene(nextSceneIndex);
     }
-    
-    IEnumerator Delay(float seconds)
+
+    private IEnumerator Delay(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         currentIndex += 1;

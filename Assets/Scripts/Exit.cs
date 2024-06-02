@@ -18,7 +18,7 @@ public class Exit : MonoBehaviour
 
     private void Update()
     {
-        if (PlayerStats.kills < killsCount) return;
+        if (PlayerStats.Kills < killsCount) return;
         if (dialog != null)
             dialog.SetActive(true);
         else

@@ -1,12 +1,10 @@
-using Player;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool isPaused = false;
+    public static bool IsPaused;
     public GameObject pauseMenuUI;
     public Button continueButton;
     public Button quitButton;
@@ -20,9 +18,8 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"{continueButton.transform.position}  {Input.mousePosition}");
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
-        if (isPaused)
+        if (IsPaused)
             Continue();
         else
             Pause();
@@ -30,23 +27,23 @@ public class PauseMenu : MonoBehaviour
 
     private void Pause()
     {
-        isPaused = true;
+        IsPaused = true;
         Time.timeScale = 0f;
         pauseMenuUI.SetActive(true);
     }
 
     private void Continue()
     {
-        isPaused = false;
+        IsPaused = false;
         Time.timeScale = 1f;
         pauseMenuUI.SetActive(false);
     }
 
-    private void LoadMainMenu()
+    private static void LoadMainMenu()
     {
-        isPaused = false;
+        IsPaused = false;
         Time.timeScale = 1f;
-        PlayerStats.kills = 0;
+        PlayerStats.Kills = 0;
         SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 }

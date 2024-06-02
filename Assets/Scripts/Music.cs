@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using DefaultNamespace;
 using UnityEngine;
 
 public class Music : MonsterTypeIdentifier
@@ -10,7 +8,6 @@ public class Music : MonsterTypeIdentifier
     public void Update()
     {
         CheckForDistance();
-        
     }
 
     public void LateUpdate()
@@ -34,10 +31,16 @@ public class Music : MonsterTypeIdentifier
 
     private void TryMakeSoundOnClick()
     {
-        if (other.IsCorrectClick != null)
-            if (other.IsCorrectClick == true)
+        switch (other.IsCorrectClick)
+        {
+            case null:
+                return;
+            case true:
                 other.PlaySound(other.objectSounds[2], volume: 0.5f, fadeInTime: 0);
-            else
+                break;
+            default:
                 other.PlaySound(other.objectSounds[0], volume: 0.5f, fadeInTime: 0);
+                break;
+        }
     }
 }

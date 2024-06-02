@@ -230,7 +230,7 @@ public class BossButtonsGenerator : Sounds
     {
         foreach (var button in buttons.Keys.Where((k, _) => !deletedButtons.Contains(k)))
         {
-            isPaused = PauseMenu.isPaused;
+            isPaused = PauseMenu.IsPaused;
             if (isPaused) continue;
             button.transform.localScale -= buttonDecreaseParameter;
             var buttonSprite = button.GetComponent<SpriteRenderer>();

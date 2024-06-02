@@ -33,7 +33,7 @@ namespace Player
             {
                 arrow.SetActive(!arrow.activeSelf); // Переключаем видимость стрелки
             }
-            isPaused = PauseMenu.isPaused;
+            isPaused = PauseMenu.IsPaused;
             if (!isPaused) // Only control the steps if the game is not paused
             {
                 ResumeMusic();

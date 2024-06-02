@@ -6,7 +6,6 @@ public class LoadingScreenSystem : MonoBehaviour
 {
     [SerializeField] private int neededTurnsCount;
     [SerializeField] private GameObject gear;
-    private int turnsCount;
     private const float RotationSpeed = 1f;
     private float time;
 
@@ -24,9 +23,8 @@ public class LoadingScreenSystem : MonoBehaviour
 
     private void MakeGearTurn()
     {
+        Console.WriteLine(2);
         gear.transform.Rotate(0, 0, RotationSpeed);
-        if (Math.Abs(gear.transform.eulerAngles.z - 359) < 0.1)
-            turnsCount++;
     }
 
     private void TryMoveToNextScene()

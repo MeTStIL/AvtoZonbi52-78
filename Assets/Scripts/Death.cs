@@ -10,13 +10,13 @@ public static class Death
     public static void MoveToScreenDeath()
     {
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
-        PlayerStats.currentLevelIndex = currentLevelIndex;
+        PlayerStats.CurrentLevelIndex = currentLevelIndex;
         SceneManager.LoadScene(DeathScreenIndex);
     }
 
     public static void Respawn()
     {
-        PlayerStats.kills = 0;
-        SceneManager.LoadScene(PlayerStats.currentLevelIndex, LoadSceneMode.Single);
+        PlayerStats.Kills = 0;
+        SceneManager.LoadScene(PlayerStats.CurrentLevelIndex, LoadSceneMode.Single);
     }
 }

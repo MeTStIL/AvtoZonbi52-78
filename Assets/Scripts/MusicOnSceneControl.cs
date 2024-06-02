@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public class MusicOnSceneControl : Sounds
 {
@@ -13,7 +10,7 @@ public class MusicOnSceneControl : Sounds
 
     private void Update()
     {
-        isPaused = PauseMenu.isPaused;
+        isPaused = PauseMenu.IsPaused;
         if(isPaused)
             PauseMusic();
         else
