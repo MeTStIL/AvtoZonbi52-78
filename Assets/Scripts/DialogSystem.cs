@@ -27,7 +27,7 @@ public class DialogSystem : Sounds
         StartDialog();
     }
 
-    void StartDialog()
+    public void StartDialog()
     {
         isDialogActive = true;
         dialogText.text = string.Empty;
@@ -77,16 +77,23 @@ public class DialogSystem : Sounds
 
     private void SpawnObjects()
     {
-        Debug.Log("СПАВНЮ");
         foreach (var obj in objectsToSpawn)
             obj.SetActive(true);
     }
+    
     public void Update()
     {
         if (startEducation)
             MakeStartEducation();
 
+        
+        
         if (Input.GetKeyDown(KeyCode.Space) && MovementTips != null && MovementTips.activeSelf) return;
+        if (index == 2 && MovementTips == null && !isDialogActive)
+        {
+            NextLines();
+            StartDialog();
+        }
         if (!Input.GetKeyDown(KeyCode.Space)) return;
         if (isDialogActive)
         {
@@ -96,7 +103,6 @@ public class DialogSystem : Sounds
         }
         else
         {
-            
             NextLines();
             StartDialog();
         }

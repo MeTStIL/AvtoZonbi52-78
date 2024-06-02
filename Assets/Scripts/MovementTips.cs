@@ -17,7 +17,7 @@ public class MovementTips : Sounds
     
     private void Update()
     {
-        if (correctCount <= 4)
+        if (correctCount < 4)
         {
             for (var i = 0; i < buttons.Length; i++)
             {
@@ -26,7 +26,10 @@ public class MovementTips : Sounds
             }
         }
         else
+        {
             DestroyImmediate(gameObject);
+            gameObject.SetActive(false);
+        }
     }
 
     private void MakeButtonCorrect(GameObject button, char letter)
