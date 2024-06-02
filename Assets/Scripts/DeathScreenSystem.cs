@@ -10,9 +10,16 @@ public class DeathScreenSystem : MonoBehaviour
     [SerializeField] private GameObject gear;
     private int turnsCount;
     private const float RotationSpeed = 0.5f;
-
+    private float time;
+    
+    private void Start()
+    {
+        time = 0;
+    }
+    
     private void Update()
     {
+        time += Time.deltaTime;
         MakeGearTurn();
         TryMoveToNextScene();
     }
@@ -20,7 +27,7 @@ public class DeathScreenSystem : MonoBehaviour
     private void MakeGearTurn()
     {
         gear.transform.Rotate(0, 0, RotationSpeed);
-        if (Math.Abs(gear.transform.eulerAngles.z - 359) < 0.1)
+        if (time >= 5f)
             turnsCount++;
     }
 

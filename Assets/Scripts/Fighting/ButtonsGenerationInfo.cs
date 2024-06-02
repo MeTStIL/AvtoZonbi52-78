@@ -37,6 +37,7 @@ namespace Fighting
             {'a', KeyCode.DownArrow},
             {'s', KeyCode.LeftArrow},
             {'d', KeyCode.RightArrow},
+            {'`', KeyCode.Escape},
         };
     }
 }

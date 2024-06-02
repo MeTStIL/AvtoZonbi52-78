@@ -6,6 +6,7 @@ public static class Death
     private static int currentLevelIndex;
     public static int DeathScreenIndex = 1;
     
+    
     public static void MoveToScreenDeath()
     {
         currentLevelIndex = SceneManager.GetActiveScene().buildIndex;

@@ -7,10 +7,17 @@ public class LoadingScreenSystem : MonoBehaviour
     [SerializeField] private int neededTurnsCount;
     [SerializeField] private GameObject gear;
     private int turnsCount;
-    private const float RotationSpeed = 10f;
+    private const float RotationSpeed = 1f;
+    private float time;
+
+    private void Start()
+    {
+        time = 0;
+    }
 
     private void Update()
     {
+        time += Time.deltaTime;
         MakeGearTurn();
         TryMoveToNextScene();
     }
@@ -24,7 +31,7 @@ public class LoadingScreenSystem : MonoBehaviour
 
     private void TryMoveToNextScene()
     {
-        if (turnsCount == neededTurnsCount)
+        if (time >= 5f)
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
