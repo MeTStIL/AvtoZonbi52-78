@@ -37,7 +37,10 @@ public class FightingMechanic : MonsterTypeIdentifier
     private void CheckPlayerMissClick()
     {
         if (other.IsCorrectClick == false)
+        {
+            timeForAttack = Time.time;
             other.playerHealth.TakeDamage(1);
+        }
     }
 
     private void GenerateButtonSequence()
@@ -70,7 +73,7 @@ public class FightingMechanic : MonsterTypeIdentifier
     private void CheckForAttack()
     {
         if (!isButtonGenerated) return;
-        if (Time.time - timeForAttack > 2f)
+        if (Time.time - timeForAttack > 3.5f)
             CheckTimeToAttack();
         else if (buttonSequence.Count == 0)
             GiveDamageToMonster();

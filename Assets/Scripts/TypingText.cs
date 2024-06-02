@@ -11,6 +11,7 @@ public class TypingText : Sounds
 {
     private float startTime;
     [SerializeField] private GameObject skipButton;
+    [SerializeField] private int nextSceneIndex;
     [SerializeField] private GameObject skipText;
     public float delay = 0.1f;
     private readonly float visabilityCoef = 0.1f;
@@ -78,7 +79,7 @@ public class TypingText : Sounds
         if (!isActive && currentIndex < messages.Count)
             StartCoroutine(ShowText(currentIndex));
         if (Input.GetKeyDown(KeyCode.Q))
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+            SceneManager.LoadScene(nextSceneIndex);
     }
     
     IEnumerator Delay(float seconds)
@@ -98,7 +99,7 @@ public class TypingText : Sounds
         
         if (currentIndex != messages.Count) return;
         StartCoroutine(Delay(2));
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        SceneManager.LoadScene(nextSceneIndex);
     }
     private void EnableExitButton()
     {

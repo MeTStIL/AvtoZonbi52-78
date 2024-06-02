@@ -61,10 +61,15 @@ public class BossButtonsGenerator : Sounds
         timeStart = Time.deltaTime;
     }
 
-    private void CheckForIncorrectClick()
+    private bool CheckForIncorrectClick()
     {
         if (!isButtonCorrect && Input.anyKeyDown && !isDelay)
+        {
             DamagePlayer();
+            return true;
+        }
+
+        return false;
     }
 
     private bool CheckForCorrectClick(KeyValuePair<GameObject, KeyCode> genButton)
@@ -97,7 +102,8 @@ public class BossButtonsGenerator : Sounds
                 CheckForUnClicked(genButton);
                 if (CheckForCorrectClick(genButton))
                     break;
-                CheckForIncorrectClick();
+                if (CheckForIncorrectClick())
+                    break;
             }
         }
         
@@ -105,6 +111,8 @@ public class BossButtonsGenerator : Sounds
     
     private void Update()
     {
+        if (playerHealth == 0)
+            Death.MoveToScreenDeath();
         isButtonCorrect = false;
         CheckForBossDamage();
         TryGenerateButton();
@@ -151,12 +159,17 @@ public class BossButtonsGenerator : Sounds
     
     private void DamagePlayer()
     {
+        if (playerHealth == 0)
+        {
+            Death.MoveToScreenDeath();
+            return;
+        }
+
         PlaySound(objectSounds[3]);
         playerHealth -= 1;
         var texture = LettersTo2DTextures.LoadTextureFromPath($"Assets/PlayerHealthBar/{playerHealth}.png");
         playerHealthBar.texture = texture;
-        if (playerHealth == 0)
-            Death.MoveToScreenDeath();
+        
     }
 
     private void MakeSecondWave()
