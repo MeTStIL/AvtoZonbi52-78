@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class Monster : Sounds, IMonster
+public class Monster : Sounds
 {
     [FormerlySerializedAs("WalkingRadius")] [SerializeField] private float walkingRadius;
     [FormerlySerializedAs("VisibleRadius")] [SerializeField] public float visibleRadius;
