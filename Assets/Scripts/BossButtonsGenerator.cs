@@ -38,8 +38,8 @@ public class BossButtonsGenerator : Sounds
     {
         buttonGenerator = new ButtonSequenceGen();
         buttonsToDamage = 10;
-        buttonsGenTimeDelay = 0.5f;
-        buttonDecreaseParameter = new Vector3(0.003f, 0.003f, 0.003f);
+        buttonsGenTimeDelay = 0.6f;
+        buttonDecreaseParameter = new Vector3(0.002f, 0.002f, 0.002f);
         buttonVisibilityParameter = 0.0005f;
         applyButtonsCount = 0;   
         timeStart = Time.deltaTime;
@@ -89,7 +89,7 @@ public class BossButtonsGenerator : Sounds
         if (!(genButton.Key.transform.localScale.x < 2f)) return;
         deletedButtons.Add(genButton.Key);
         ChangeButtonColor(genButton.Key, genButton.Value, "cancel");
-        Destroy(genButton.Key, 0.3f);
+        Destroy(genButton.Key, 0.1f);
         DamagePlayer();
     }
 
@@ -99,14 +99,17 @@ public class BossButtonsGenerator : Sounds
         {
             if (!deletedButtons.Contains(genButton.Key))
             {
-                CheckForUnClicked(genButton);
+                
                 if (CheckForCorrectClick(genButton))
-                    break;
-                if (CheckForIncorrectClick())
-                    break;
+                    return;
+                CheckForUnClicked(genButton);
             }
+            
         }
-        
+
+        CheckForIncorrectClick();
+
+
     }
     
     private void Update()
@@ -175,7 +178,7 @@ public class BossButtonsGenerator : Sounds
     private void MakeSecondWave()
     {
         PlaySound(objectSounds[1]);
-        buttonDecreaseParameter = new Vector3(0.005f, 0.005f, 0.005f);
+        buttonDecreaseParameter = new Vector3(0.003f, 0.003f, 0.003f);
         isSecondWave = true;
         MakeWaveDelay();
     }
@@ -183,7 +186,7 @@ public class BossButtonsGenerator : Sounds
     private void MakeLastWave()
     {
         PlaySound(objectSounds[2]);
-        buttonDecreaseParameter = new Vector3(0.006f, 0.006f, 0.006f);
+        buttonDecreaseParameter = new Vector3(0.005f, 0.005f, 0.005f);
         isLastWave = true;
         buttonsToDamage = 20;
         buttonsGenTimeDelay = 0.3f;
