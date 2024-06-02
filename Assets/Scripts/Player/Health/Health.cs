@@ -1,24 +1,21 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Player.Health
 {
     public class Health : MonoBehaviour
     {
         [SerializeField] private float startingHealth;
-        public float currentHealth { get; private set; }
+        public float CurrentHealth { get; private set; }
 
         public void Awake()
         {
-            currentHealth = startingHealth;
+            CurrentHealth = startingHealth;
         }
 
         public void TakeDamage(float damage)
         {
-            currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
-
-            if (currentHealth == 0)
+            CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, startingHealth);
+            if (CurrentHealth == 0)
                 Death.MoveToScreenDeath();
         }
     }

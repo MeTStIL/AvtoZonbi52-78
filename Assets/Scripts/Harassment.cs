@@ -1,6 +1,3 @@
-using System;
-using DefaultNamespace;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Harassment : MonsterTypeIdentifier

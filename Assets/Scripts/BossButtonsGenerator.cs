@@ -6,20 +6,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = System.Random;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class BossButtonsGenerator : Sounds
 {
+    [FormerlySerializedAs("BossType")] [SerializeField] private string bossType;
     [SerializeField] private RawImage bossHealthBar;
     [SerializeField] private RawImage playerHealthBar;
-    [SerializeField] private string BossType;
     [SerializeField] private GameObject wings;
     [SerializeField] private GameObject fire;
     private int bossHeath;
     private int playerHealth;
     public GameObject buttonPrefab;
     private static Dictionary<string, Texture2D> buttonTextures;
-    private static string letters = "EQZCFR";
-    private readonly int buttonsLimit = 10;
+    private const string Letters = "EQZCFR";
+    private const int ButtonsLimit = 10;
     private SpriteRenderer sprite;
     private bool isSecondWave;
     private bool isLastWave;
@@ -52,15 +53,14 @@ public class BossButtonsGenerator : Sounds
         bossHeath = 8;
         playerHealth = 8;
         buttonPrefab = Resources.Load<GameObject>("button");
-        buttonTextures = LettersTo2DTextures.ConnectCharWithTexture(letters);
-        
-        
+        buttonTextures = LettersTo2DTextures.ConnectCharWithTexture(Letters);
     }
 
     private void TryGenerateButton()
     {
-        if (bossHeath <= 0 || buttons.Count - deletedButtons.Count >= buttonsLimit ||
-            !(timeStart > buttonsGenTimeDelay)) return;
+        if (bossHeath <= 0 || buttons.Count - deletedButtons.Count >= ButtonsLimit ||
+            !(timeStart > buttonsGenTimeDelay)) 
+            return;
         isDelay = false;
         GenerateButton();
         timeStart = Time.deltaTime;
@@ -69,9 +69,7 @@ public class BossButtonsGenerator : Sounds
     private void CheckForIncorrectClick()
     {
         if (!isButtonCorrect && Input.anyKeyDown && !isDelay)
-        {
             DamagePlayer();
-        }
     }
 
     private bool CheckForCorrectClick(KeyValuePair<GameObject, KeyCode> genButton)
@@ -97,21 +95,16 @@ public class BossButtonsGenerator : Sounds
 
     private void CheckPlayerInput()
     {
-        foreach (var genButton in buttons)
+        var currentButtons = buttons
+            .Where(genButton => !deletedButtons
+                .Contains(genButton.Key));
+        foreach (var genButton in currentButtons)
         {
-            if (!deletedButtons.Contains(genButton.Key))
-            {
-                
-                if (CheckForCorrectClick(genButton))
-                    return;
-                CheckForUnClicked(genButton);
-            }
-            
+            if (CheckForCorrectClick(genButton))
+                return;
+            CheckForUnClicked(genButton);
         }
-
         CheckForIncorrectClick();
-
-
     }
     
     private void Update()
@@ -125,22 +118,19 @@ public class BossButtonsGenerator : Sounds
         DecreasingButtons();
         timeStart += Time.deltaTime;
         CheckForBossDeath();
-        
     }
 
     private void CheckForBossDeath()
     {
-        if (bossHeath == 0)
+        if (bossHeath != 0) 
+            return;
+        if (!isWin)
         {
-            if (!isWin)
-            {
-                MakeWaveDelay();
-                MakeFinalDelay();
-            }
-
-            if (timeStart >= 8f)
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            MakeWaveDelay();
+            MakeFinalDelay();
         }
+        if (timeStart >= 8f)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     private void CheckForBossDamage()
@@ -155,9 +145,10 @@ public class BossButtonsGenerator : Sounds
     private void MakeWaveDelay()
     {
         isDelay = true;
-        foreach (var genButton in buttons)
+        foreach (var genButton in buttons
+                     .Where(genButton => !deletedButtons
+                         .Contains(genButton.Key)))
         {
-            if (deletedButtons.Contains(genButton.Key)) continue;
             deletedButtons.Add(genButton.Key);
             Destroy(genButton.Key, 0.3f);
         }
@@ -174,13 +165,12 @@ public class BossButtonsGenerator : Sounds
     private void DamageBoss()
     {
         bossHeath -= 1;
-        var texture = LettersTo2DTextures.LoadTextureFromPath($"Assets/{BossType}HealthBar/{bossHeath}.png");
+        var texture = LettersTo2DTextures.LoadTextureFromPath($"Assets/{bossType}HealthBar/{bossHeath}.png");
         bossHealthBar.texture = texture;
         if (bossHeath == 4 && isSecondWave == false)
             MakeSecondWave();
         if (bossHeath == 1 && isLastWave == false)
             MakeLastWave();
-        
     }
     
     private void DamagePlayer()
@@ -190,12 +180,10 @@ public class BossButtonsGenerator : Sounds
             Death.MoveToScreenDeath();
             return;
         }
-
         PlaySound(objectSounds[3]);
         playerHealth -= 1;
         var texture = LettersTo2DTextures.LoadTextureFromPath($"Assets/PlayerHealthBar/{playerHealth}.png");
         playerHealthBar.texture = texture;
-        
     }
 
     private void MakeSecondWave()
@@ -219,7 +207,7 @@ public class BossButtonsGenerator : Sounds
         
     }
     
-    private void ChangeButtonColor(GameObject button, KeyCode letter, string type)
+    private static void ChangeButtonColor(GameObject button, KeyCode letter, string type)
     {
         var texture = buttonTextures[letter + type];
         Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height),Vector2.zero);
@@ -242,7 +230,7 @@ public class BossButtonsGenerator : Sounds
 
     private void GenerateButton()
     {
-        var buttonSize = 5f;
+        const float buttonSize = 5f;
         var button = buttonGenerator.GenerateButton();
         var random = new Random();
         var buttonPosition =sprite.transform.position + new Vector3(random.Next(-5, 5), 

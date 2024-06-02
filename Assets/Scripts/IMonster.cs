@@ -1,5 +1,4 @@
 using System.Collections;
-using DefaultNamespace;
 using UnityEngine;
 
 public interface IMonster

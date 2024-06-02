@@ -1,4 +1,3 @@
-
 public class MediumMonster : Monster
 {
     public override void Awake()
