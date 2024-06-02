@@ -12,6 +12,8 @@ public class BossButtonsGenerator : Sounds
     [SerializeField] private RawImage bossHealthBar;
     [SerializeField] private RawImage playerHealthBar;
     [SerializeField] private string BossType;
+    [SerializeField] private GameObject wings;
+    [SerializeField] private GameObject fire;
     private int bossHeath;
     private int playerHealth;
     public GameObject buttonPrefab;
@@ -33,9 +35,10 @@ public class BossButtonsGenerator : Sounds
     private bool isPaused;
     private ButtonSequenceGen buttonGenerator;
     private bool isButtonCorrect;
-
+    private bool isWin;
     private void Awake()
     {
+        isWin = false;
         buttonGenerator = new ButtonSequenceGen();
         buttonsToDamage = 10;
         buttonsGenTimeDelay = 0.6f;
@@ -50,6 +53,8 @@ public class BossButtonsGenerator : Sounds
         playerHealth = 8;
         buttonPrefab = Resources.Load<GameObject>("button");
         buttonTextures = LettersTo2DTextures.ConnectCharWithTexture(letters);
+        
+        
     }
 
     private void TryGenerateButton()
@@ -119,7 +124,23 @@ public class BossButtonsGenerator : Sounds
         CheckPlayerInput();
         DecreasingButtons();
         timeStart += Time.deltaTime;
+        CheckForBossDeath();
         
+    }
+
+    private void CheckForBossDeath()
+    {
+        if (bossHeath == 0)
+        {
+            if (!isWin)
+            {
+                MakeWaveDelay();
+                MakeFinalDelay();
+            }
+
+            if (timeStart >= 3f)
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     private void CheckForBossDamage()
@@ -142,6 +163,13 @@ public class BossButtonsGenerator : Sounds
         }
         timeStart = -3f;
     }
+
+    private void MakeFinalDelay()
+    {
+        // СЮДА ЗВУК
+        timeStart = 0;
+        isWin = true;
+    }
     
     private void DamageBoss()
     {
@@ -152,8 +180,6 @@ public class BossButtonsGenerator : Sounds
             MakeSecondWave();
         if (bossHeath == 1 && isLastWave == false)
             MakeLastWave();
-        if (bossHeath == 0)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
     }
     
@@ -178,6 +204,7 @@ public class BossButtonsGenerator : Sounds
         buttonDecreaseParameter = new Vector3(0.003f, 0.003f, 0.003f);
         isSecondWave = true;
         MakeWaveDelay();
+        wings.SetActive(true);
     }
     
     private void MakeLastWave()
@@ -188,6 +215,7 @@ public class BossButtonsGenerator : Sounds
         buttonsToDamage = 20;
         buttonsGenTimeDelay = 0.3f;
         MakeWaveDelay();
+        fire.SetActive(true);
         
     }
     

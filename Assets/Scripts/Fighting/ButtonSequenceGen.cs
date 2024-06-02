@@ -52,7 +52,8 @@ namespace Fighting
         {
             sequence.Enqueue(buttonInfo.Letter);
             buttonInfo.Button.transform.localScale = new Vector3(2, 2, 2);
-            buttonInfo.ButtonSpriteRenderer.sortingOrder = 10;
+            buttonInfo.ButtonSpriteRenderer.sortingOrder = 100;
+            buttonInfo.ButtonSpriteRenderer.sortingLayerName = "Collisions";
             buttonInfo.ButtonSpriteRenderer.sprite = 
                 Sprite.Create(buttonInfo.Texture, new Rect(0, 0, buttonInfo.Texture.width, 
                     buttonInfo.Texture.height), Vector2.zero);
