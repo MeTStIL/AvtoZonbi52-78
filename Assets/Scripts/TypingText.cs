@@ -93,7 +93,8 @@ public class TypingText : Sounds
     private void EnableExitButton()
     {
         startTime += Time.deltaTime;
-        if (!(Math.Abs(startTime - 3f) < 0.3f)) return;
+        if (!(Math.Abs(startTime - 3f) < 0.3f)) 
+            return;
         skipButton.SetActive(true);
         skipText.SetActive(true);
     }

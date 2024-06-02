@@ -36,7 +36,7 @@ namespace Player
             {
                 arrow.SetActive(!arrow.activeSelf);
             }
-            isPaused = PauseMenu.isPaused;
+            isPaused = PauseMenu.IsPaused;
             if (!isPaused)
             {
                 ResumeMusic();

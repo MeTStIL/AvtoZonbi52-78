@@ -10,7 +10,8 @@ public static class ImageMessageConverter
         var images = new Dictionary<int, Texture2D>();
         for (var i = 0; i < Directory.GetFiles(imagesPath).Length; i++)
         {
-            var fileData = File.ReadAllBytes(imagesPath + $"/{i}.png");
+            if (!File.Exists(imagesPath + $"/{i}.png")) continue;
+            var fileData = System.IO.File.ReadAllBytes(imagesPath + $"/{i}.png");
             var texture = new Texture2D(1000, 500);
             texture.LoadImage(fileData);
             images[i] = texture;
