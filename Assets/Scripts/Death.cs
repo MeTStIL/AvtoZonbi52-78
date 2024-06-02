@@ -15,6 +15,7 @@ public static class Death
 
     public static void Respawn()
     {
+        PlayerStats.kills = 0;
         SceneManager.LoadScene(PlayerStats.currentLevelIndex);
     }
 }

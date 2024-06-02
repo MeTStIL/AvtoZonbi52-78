@@ -27,8 +27,9 @@ public class MovementTips : Sounds
         }
         else
         {
+            correctCount = 0;
             DestroyImmediate(gameObject);
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
         }
     }
 
