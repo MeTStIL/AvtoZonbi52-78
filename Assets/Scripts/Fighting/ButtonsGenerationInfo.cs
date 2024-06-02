@@ -32,7 +32,11 @@ namespace Fighting
             { 'W', KeyCode.W },
             { 'A', KeyCode.A },
             { 'S', KeyCode.S },
-            { 'D', KeyCode.D }
+            { 'D', KeyCode.D },
+            { 'w', KeyCode.UpArrow},
+            {'a', KeyCode.DownArrow},
+            {'s', KeyCode.LeftArrow},
+            {'d', KeyCode.RightArrow},
         };
     }
 }
