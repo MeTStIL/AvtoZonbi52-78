@@ -1,6 +1,3 @@
-using DefaultNamespace;
-using UnityEngine;
-
 public class HardMonster : Monster
 {
     public override void Awake()
@@ -14,6 +11,5 @@ public class HardMonster : Monster
             CurrentSpeed = 2
         };
         ButtonCount = 4;
-        
     }
 }

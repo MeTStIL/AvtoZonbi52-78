@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -24,8 +23,8 @@ public class TypingText : Sounds
     private int currentIndex;
     void Start()
     {
-        messages = ImageMessageConvertion.GetTexts(messagesPath);
-        images = ImageMessageConvertion.GetImages(imagesPath);
+        messages = ImageMessageConverter.GetTexts(messagesPath);
+        images = ImageMessageConverter.GetImages(imagesPath);
         isActive = false;
         startTime = Time.deltaTime;
         textComp = GetComponent<Text>();

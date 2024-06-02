@@ -9,7 +9,7 @@ namespace Fighting
     {
         public static Dictionary<string, Texture2D> ConnectCharWithTexture(string sequence)
         {
-            var basePath = "Assets/Buttons";
+            const string basePath = "Assets/Buttons";
             return sequence
                 .Select(letter => letter.ToString().ToUpper())
                 .SelectMany(letter => new[] { "", "apply", "cancel" }

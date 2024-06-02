@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DialogSystem : Sounds
@@ -10,51 +8,46 @@ public class DialogSystem : Sounds
     [SerializeField] private bool startEducation;
     [SerializeField] private GameObject[] objectsToSpawn;
     [SerializeField] private GameObject[] destroyableObjects;
-    [SerializeField] private GameObject CollisionToOpen;
+    [FormerlySerializedAs("CollisionToOpen")] [SerializeField] private GameObject collisionToOpen;
+    [FormerlySerializedAs("MovementTips")] public GameObject movementTips;
+    [FormerlySerializedAs("ContinueDialog")] public GameObject continueDialog;
+    [FormerlySerializedAs("FightingTips")] public GameObject fightingTips;
     public string[] lines;
-    public GameObject MovementTips;
-    public GameObject ContinueDialog;
-    public GameObject FightingTips;
     public float speedText;
     public Text dialogText;
     public int index;
     private bool isDialogActive;
 
-    void Start ()
+    private void Start ()
     {
         isDialogActive = false;
         index = 0;
         StartDialog();
     }
 
-    public void StartDialog()
+    private void StartDialog()
     {
         isDialogActive = true;
         dialogText.text = string.Empty;
         StartCoroutine(TypeLine());
     }
 
-    IEnumerator TypeLine()
+    private IEnumerator TypeLine()
     {
-        for (int i = 0; i < lines[index].Length; i++)
+        for (var i = 0; i < lines[index].Length; i++)
         {
             dialogText.text += lines[index][i];
             yield return new WaitForSeconds(speedText);
-            
             if (i % 2 == 0)
-            {
                 PlaySound(objectSounds[0], volume: 0.8f, fadeInTime: 0);
-            }
         }
         isDialogActive = false;
     }
-    
-    public void NextLines()
+
+    private void NextLines()
     {
         if (index < lines.Length - 1) 
-        {
             index++;
-        } 
         else
         {
             if (objectsToSpawn.Length > 0)
@@ -62,15 +55,11 @@ public class DialogSystem : Sounds
             StopAllCoroutines();
             if (startEducation)
             {
-                FightingTips.SetActive(true);
-                CollisionToOpen.SetActive(false);
+                fightingTips.SetActive(true);
+                collisionToOpen.SetActive(false);
             }
-
             foreach (var destroyableObject in destroyableObjects)
-            {
                 Destroy(destroyableObject);
-            }
-            
         }
     }
 
@@ -84,11 +73,8 @@ public class DialogSystem : Sounds
     {
         if (startEducation)
             MakeStartEducation();
-
-        
-        
-        if (Input.GetKeyDown(KeyCode.Space) && MovementTips != null && MovementTips.activeSelf) return;
-        if (index == 2 && MovementTips == null && !isDialogActive && startEducation)
+        if (Input.GetKeyDown(KeyCode.Space) && movementTips != null && movementTips.activeSelf) return;
+        if (index == 2 && movementTips == null && !isDialogActive && startEducation)
         {
             NextLines();
             StartDialog();
@@ -109,16 +95,11 @@ public class DialogSystem : Sounds
 
     private void MakeStartEducation()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && ContinueDialog != null)
-            DestroyImmediate(ContinueDialog);
-        if ( ContinueDialog != null && index == 0 && !isDialogActive)
-        {
-            ContinueDialog.SetActive(true);
-        }
-        if ( MovementTips != null && index == 2 && !isDialogActive)
-        {
-            MovementTips.SetActive(true);
-        }
-        
+        if (Input.GetKeyDown(KeyCode.Space) && continueDialog != null)
+            DestroyImmediate(continueDialog);
+        if ( continueDialog != null && index == 0 && !isDialogActive)
+            continueDialog.SetActive(true);
+        if ( movementTips != null && index == 2 && !isDialogActive)
+            movementTips.SetActive(true);
     }
 }

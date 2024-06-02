@@ -1,26 +1,29 @@
-using UnityEngine;
 using System.Collections.Generic;
 using Player;
+using UnityEngine;
 
-
-public class CheckpointManager : MonoBehaviour
+namespace ArrowScript
 {
-    public List<Transform> checkpoints;
-    private int currentCheckpointIndex;
-    public float reachDistance = 1.0f;
-    public PlayerMovement player;
-    
-
-    private void Update()
+    public class CheckpointManager : MonoBehaviour
     {
-        if (checkpoints.Count <= 0 || !(Vector3.Distance(player.transform.position, checkpoints[currentCheckpointIndex].position) < reachDistance)) return;
-        currentCheckpointIndex++;
-        if (currentCheckpointIndex >= checkpoints.Count)
-            currentCheckpointIndex = checkpoints.Count - 1;
-    }
+        public List<Transform> checkpoints;
+        private int currentCheckpointIndex;
+        public float reachDistance = 1.0f;
+        public PlayerMovement player;
+        
+        private void Update()
+        {
+            if (checkpoints.Count <= 0 || !(Vector3.Distance(player.transform.position, 
+                    checkpoints[currentCheckpointIndex].position) < reachDistance)) 
+                return;
+            currentCheckpointIndex++;
+            if (currentCheckpointIndex >= checkpoints.Count)
+                currentCheckpointIndex = checkpoints.Count - 1;
+        }
 
-    public Transform GetCurrentTarget()
-    {
-        return checkpoints.Count > 0 ? checkpoints[currentCheckpointIndex] : null;
+        public Transform GetCurrentTarget()
+        {
+            return checkpoints.Count > 0 ? checkpoints[currentCheckpointIndex] : null;
+        }
     }
 }

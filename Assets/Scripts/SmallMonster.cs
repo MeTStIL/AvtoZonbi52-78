@@ -1,5 +1,3 @@
-using DefaultNamespace;
-
 public class SmallMonster : Monster
 {
     public override void Awake()

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class FightingMechanic : MonsterTypeIdentifier
 {
-    public ButtonSequenceGen buttonGenerator;
+    private ButtonSequenceGen buttonGenerator;
     private List<GameObject> buttonInstances;
     private Queue<char> buttonSequence;
     private int buttonCount;
     public bool isButtonGenerated;
     public float timeForAttack;
+    
     private void Start()
     {
         buttonSequence = new Queue<char>();
@@ -36,11 +37,10 @@ public class FightingMechanic : MonsterTypeIdentifier
 
     private void CheckPlayerMissClick()
     {
-        if (other.IsCorrectClick == false)
-        {
-            timeForAttack = Time.time;
-            other.playerHealth.TakeDamage(1);
-        }
+        if (other.IsCorrectClick != false) 
+            return;
+        timeForAttack = Time.time;
+        other.playerHealth.TakeDamage(1);
     }
 
     private void GenerateButtonSequence()
@@ -50,8 +50,8 @@ public class FightingMechanic : MonsterTypeIdentifier
         foreach (var letter in buttons)
         {
             var newButton = Instantiate(other.buttonPrefab, buttonPosition, Quaternion.identity, transform);
-            var buttonInfo = new ButtonInfo(newButton, letter, other.sprite);
-            buttonGenerator.GenerateSprite(buttonInfo, buttonSequence, buttonInstances, buttonCount, buttonPosition);
+            var buttonInfo = new ButtonInfo(newButton, letter);
+            ButtonSequenceGen.GenerateSprite(buttonInfo, buttonSequence, buttonInstances);
             buttonPosition += new Vector3(1*0.8f, 0, 0);
         }
         isButtonGenerated = true;

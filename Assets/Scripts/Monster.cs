@@ -1,5 +1,4 @@
 using System.Collections;
-using DefaultNamespace;
 using Player.Health;
 using UnityEngine;
 using UnityEngine.Serialization;

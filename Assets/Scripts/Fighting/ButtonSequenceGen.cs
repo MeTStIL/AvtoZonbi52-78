@@ -8,7 +8,7 @@ namespace Fighting
 {
     public class ButtonSequenceGen
     {
-        public bool IsButtonsGenerated { get; set; }
+        private bool IsButtonsGenerated { get; set; }
         
         public readonly Func<char> GenerateButton = () => 
             ButtonsGenerationInfo.Letters[new Random().Next(0, ButtonsGenerationInfo.Letters.Length)];
@@ -36,19 +36,19 @@ namespace Fighting
             return false;
         }
 
-        private void ChangeButtonColor(string buttonType, KeyCode buttonKeyCode, GameObject button)
+        private static void ChangeButtonColor(string buttonType, KeyCode buttonKeyCode, GameObject button)
         {
             var texture = ButtonsGenerationInfo.p_ButtonTextures[buttonKeyCode + buttonType];
             CreateSpriteToObject(texture, button);
         }
 
-        private void CreateSpriteToObject(Texture2D texture, GameObject gameObject)
+        private static void CreateSpriteToObject(Texture2D texture, GameObject gameObject)
         {
             gameObject.GetComponent<SpriteRenderer>().sprite =
                 Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
         }
 
-        public void GenerateSprite(ButtonInfo buttonInfo, Queue<char> sequence, List<GameObject> instances, int count, Vector3 position)
+        public static void GenerateSprite(ButtonInfo buttonInfo, Queue<char> sequence, List<GameObject> instances)
         {
             sequence.Enqueue(buttonInfo.Letter);
             buttonInfo.Button.transform.localScale = new Vector3(2, 2, 2);
