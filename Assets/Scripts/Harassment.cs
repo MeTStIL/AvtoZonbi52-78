@@ -1,14 +1,17 @@
 using System;
 using DefaultNamespace;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Harassment : MonsterTypeIdentifier
 {
     public float chaseRadius;
+    private FightingMechanic fightingMechanic;
 
     private void Start()
     {
-        chaseRadius = 3f * other.visibleRadius;
+        chaseRadius = 1.3f * other.visibleRadius;
+        fightingMechanic = gameObject.GetComponent<FightingMechanic>();
     }
 
     public void Update()
@@ -39,5 +42,7 @@ public class Harassment : MonsterTypeIdentifier
         other.isHarassment = false;
         other.MonsterInfo.CurrentSpeed = other.MonsterInfo.StandardSpeed;
         other.SetNewTargetPosition();
+        fightingMechanic.timeForAttack = Time.time;
+        fightingMechanic.DestroyButtons();
     }
 }

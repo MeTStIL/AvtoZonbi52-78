@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class FightingMechanic : MonsterTypeIdentifier
 {
-    private ButtonSequenceGen buttonGenerator;
+    public ButtonSequenceGen buttonGenerator;
     private List<GameObject> buttonInstances;
     private Queue<char> buttonSequence;
     private int buttonCount;
     public bool isButtonGenerated;
-    private float timeForAttack;
+    public float timeForAttack;
     private void Start()
     {
         buttonSequence = new Queue<char>();
@@ -82,13 +82,16 @@ public class FightingMechanic : MonsterTypeIdentifier
     private void GiveDamageToMonster()
     {
         isButtonGenerated = false;
-        other.MonsterInfo.LivesCount--;
         buttonInstances = new List<GameObject>();
+        other.MonsterInfo.LivesCount--;
         DestroyButtons();
     }
 
-    private void DestroyButtons()
+    public void DestroyButtons()
     {
+        isButtonGenerated = false;
+        buttonInstances = new List<GameObject>();
+        buttonSequence = new Queue<char>();
         while (gameObject.transform.childCount > 0)
             DestroyImmediate(gameObject.transform.GetChild(0).gameObject);
     }

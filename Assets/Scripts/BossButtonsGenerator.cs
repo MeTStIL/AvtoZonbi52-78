@@ -61,15 +61,12 @@ public class BossButtonsGenerator : Sounds
         timeStart = Time.deltaTime;
     }
 
-    private bool CheckForIncorrectClick()
+    private void CheckForIncorrectClick()
     {
         if (!isButtonCorrect && Input.anyKeyDown && !isDelay)
         {
             DamagePlayer();
-            return true;
         }
-
-        return false;
     }
 
     private bool CheckForCorrectClick(KeyValuePair<GameObject, KeyCode> genButton)

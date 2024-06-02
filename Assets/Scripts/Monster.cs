@@ -20,7 +20,7 @@ public class Monster : Sounds, IMonster
     private bool isStopped;
     public bool isHarassment;
     private Rigidbody2D rb;
-    public float freezeTime = 2f;
+    public float freezeTime = 0.3f;
     private bool isDead;
     public bool? IsCorrectClick;
     public Transform player;
