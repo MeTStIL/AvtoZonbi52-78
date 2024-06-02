@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public static class Death
 {
     private static int currentLevelIndex;
-    public static int DeathScreenIndex = 0;
+    public static int DeathScreenIndex = 1;
     
     public static void MoveToScreenDeath()
     {
@@ -16,6 +16,6 @@ public static class Death
     public static void Respawn()
     {
         PlayerStats.kills = 0;
-        SceneManager.LoadScene(PlayerStats.currentLevelIndex);
+        SceneManager.LoadScene(PlayerStats.currentLevelIndex, LoadSceneMode.Single);
     }
 }

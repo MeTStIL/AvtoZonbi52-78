@@ -5,7 +5,6 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.WSA;
 
 public class TypingText : Sounds
 {
@@ -13,7 +12,7 @@ public class TypingText : Sounds
     [SerializeField] private GameObject skipButton;
     [SerializeField] private int nextSceneIndex;
     [SerializeField] private GameObject skipText;
-    public float delay = 0.1f;
+    public float delay = 0.05f;
     private readonly float visabilityCoef = 0.1f;
     [SerializeField]private string messagesPath;
     private List<string> messages;
@@ -86,11 +85,6 @@ public class TypingText : Sounds
     {
         yield return new WaitForSeconds(seconds);
         currentIndex += 1;
-        isActive = false;
-    }
-    IEnumerator StartDelay(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
         isActive = false;
     }
 

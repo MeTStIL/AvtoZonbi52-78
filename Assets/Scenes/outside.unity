@@ -3454,6 +3454,7 @@ GameObject:
   - component: {fileID: 158839998}
   - component: {fileID: 158839997}
   - component: {fileID: 158839996}
+  - component: {fileID: 158839999}
   m_Layer: 0
   m_Name: Static Sprite (16)
   m_TagString: Untagged
@@ -3600,6 +3601,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &158839999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 158839994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ccfca3344ba37d4eb5d4d97a3f06d84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStatic: 1
 --- !u!1 &176422702
 GameObject:
   m_ObjectHideFlags: 0
@@ -4594,6 +4608,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!1 &282241699
 GameObject:
   m_ObjectHideFlags: 0
@@ -6681,6 +6696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!114 &515086886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6769,7 +6785,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.0000923872, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -10140,6 +10156,10 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6183502717743591783, guid: 49b7df7b1c2f22e49b9f9980e9e811d4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1817407551
+      objectReference: {fileID: 0}
     - target: {fileID: 8286592696460523177, guid: 49b7df7b1c2f22e49b9f9980e9e811d4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -10241,6 +10261,7 @@ GameObject:
   - component: {fileID: 719665734}
   - component: {fileID: 719665740}
   - component: {fileID: 719665741}
+  - component: {fileID: 719665742}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -10537,6 +10558,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 4
+--- !u!114 &719665742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 719665733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ccfca3344ba37d4eb5d4d97a3f06d84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStatic: 0
 --- !u!1 &732162422
 GameObject:
   m_ObjectHideFlags: 0
@@ -10612,7 +10646,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.0000923872, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -79993,7 +80027,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.0000923872, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -84262,7 +84296,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -1448420493
+  m_SortingLayerID: -1817407551
   m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &1204086089
@@ -90296,6 +90330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!1 &1496984938
 GameObject:
   m_ObjectHideFlags: 0
@@ -91568,6 +91603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!1 &1625030093
 GameObject:
   m_ObjectHideFlags: 0
@@ -94311,6 +94347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!1 &1943100357
 GameObject:
   m_ObjectHideFlags: 0
@@ -94769,6 +94806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!1 &1989248709 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2497360891977855847, guid: 2c657031669138247ae6b78efc20b2b7, type: 3}
@@ -94911,6 +94949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!1 &1999594426
 GameObject:
   m_ObjectHideFlags: 0
@@ -101183,7 +101222,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.0000923872, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -102192,6 +102231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!1001 &41728428383757085
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -103272,6 +103312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

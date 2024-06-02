@@ -771,6 +771,10 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7086080055790765288, guid: 49b7df7b1c2f22e49b9f9980e9e811d4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -744.05
+      objectReference: {fileID: 0}
     - target: {fileID: 8286592696460523177, guid: 49b7df7b1c2f22e49b9f9980e9e811d4, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1904,7 +1908,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.0000923872, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -3675,7 +3679,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.0000923872, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -4903,7 +4907,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+  m_ChunkCullingBounds: {x: 0.0000923872, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -12880,6 +12884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!114 &1395811809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13557,6 +13562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!114 &1553507555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14811,6 +14817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   other: {fileID: 0}
   isButtonGenerated: 0
+  timeForAttack: 0
 --- !u!114 &1970008582
 MonoBehaviour:
   m_ObjectHideFlags: 0

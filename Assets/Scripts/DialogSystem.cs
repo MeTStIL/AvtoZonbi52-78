@@ -62,7 +62,6 @@ public class DialogSystem : Sounds
             StopAllCoroutines();
             if (startEducation)
             {
-                
                 FightingTips.SetActive(true);
                 CollisionToOpen.SetActive(false);
             }
@@ -89,7 +88,7 @@ public class DialogSystem : Sounds
         
         
         if (Input.GetKeyDown(KeyCode.Space) && MovementTips != null && MovementTips.activeSelf) return;
-        if (index == 2 && MovementTips == null && !isDialogActive)
+        if (index == 2 && MovementTips == null && !isDialogActive && startEducation)
         {
             NextLines();
             StartDialog();

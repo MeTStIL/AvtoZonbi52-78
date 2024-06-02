@@ -600,7 +600,8 @@ PlayerSettings:
   scriptingDefineSymbols: {}
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Standalone: 0
   il2cppCompilerConfiguration: {}
   il2cppCodeGeneration: {}
   managedStrippingLevel:
@@ -702,7 +703,7 @@ PlayerSettings:
   embeddedLinuxEnableGamepadInput: 1
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
-  apiCompatibilityLevel: 6
+  apiCompatibilityLevel: 3
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
   cloudProjectId: 19bf1fea-b494-4c56-8051-34231ec73a6a

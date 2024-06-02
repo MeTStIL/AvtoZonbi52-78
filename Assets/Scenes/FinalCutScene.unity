@@ -772,7 +772,7 @@ MonoBehaviour:
   objectSounds:
   - {fileID: 8300000, guid: 8779e5b56478f7b4291f40f61f4e097a, type: 3}
   skipButton: {fileID: 1661769984}
-  nextSceneIndex: 1
+  nextSceneIndex: 0
   skipText: {fileID: 2132552267}
   delay: 0.1
   messagesPath: Assets/FinalCutScene/texts.txt

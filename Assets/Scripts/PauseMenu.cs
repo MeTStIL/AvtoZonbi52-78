@@ -44,7 +44,9 @@ public class PauseMenu : MonoBehaviour
 
     private void LoadMainMenu()
     {
+        isPaused = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene(1);
+        PlayerStats.kills = 0;
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 }

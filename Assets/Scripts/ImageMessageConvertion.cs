@@ -14,9 +14,9 @@ namespace DefaultNamespace
         public static Dictionary<int, Texture2D> GetImages(string imagesPath)
         {
             var images = new Dictionary<int, Texture2D>();
+            
 
-
-            for (var i = 0; i < 4; i++)
+            for (var i = 0; i < Directory.GetFiles(imagesPath).Length; i++)
             {
                 if (System.IO.File.Exists(imagesPath + $"/{i}.png"))
                 {

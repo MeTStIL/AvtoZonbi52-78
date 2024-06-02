@@ -7,7 +7,7 @@ public class LoadingScreenSystem : MonoBehaviour
     [SerializeField] private int neededTurnsCount;
     [SerializeField] private GameObject gear;
     private int turnsCount;
-    private const float RotationSpeed = 0.5f;
+    private const float RotationSpeed = 10f;
 
     private void Update()
     {

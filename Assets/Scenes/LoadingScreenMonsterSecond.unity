@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37976e3d2312e2944bc1faa0fc692fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neededTurnsCount: 5
+  neededTurnsCount: 3
   gear: {fileID: 1932275512}
 --- !u!1 &1615602614
 GameObject:
