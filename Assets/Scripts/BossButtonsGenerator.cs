@@ -138,7 +138,7 @@ public class BossButtonsGenerator : Sounds
                 MakeFinalDelay();
             }
 
-            if (timeStart >= 3f)
+            if (timeStart >= 8f)
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
@@ -166,7 +166,7 @@ public class BossButtonsGenerator : Sounds
 
     private void MakeFinalDelay()
     {
-        // СЮДА ЗВУК
+        PlaySound(objectSounds[4]);
         timeStart = 0;
         isWin = true;
     }
